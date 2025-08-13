@@ -7,7 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const Timetable = () => {
-  const [selectedClass, setSelectedClass] = useState("form-1");
+  const [selectedClass, setSelectedClass] = useState("form-1a");
 
   const timeSlots = [
     "8:00 - 8:40",
@@ -24,40 +24,136 @@ const Timetable = () => {
   ];
 
   const classes = [
-    { id: "form-1", name: "Form 1", students: "Ages 13-14" },
-    { id: "form-2", name: "Form 2", students: "Ages 14-15" },
-    { id: "form-3", name: "Form 3", students: "Ages 15-16" },
-    { id: "form-4", name: "Form 4", students: "Ages 16-17" }
+    { id: "form-1a", name: "Form 1A", students: "Ages 13-14" },
+    { id: "form-1b", name: "Form 1B", students: "Ages 13-14" },
+    { id: "form-1c", name: "Form 1C", students: "Ages 13-14" },
+    { id: "form-1d", name: "Form 1D", students: "Ages 13-14" },
+    { id: "form-2a", name: "Form 2A", students: "Ages 14-15" },
+    { id: "form-2b", name: "Form 2B", students: "Ages 14-15" },
+    { id: "form-2c", name: "Form 2C", students: "Ages 14-15" },
+    { id: "form-2d", name: "Form 2D", students: "Ages 14-15" },
+    { id: "form-3a", name: "Form 3A", students: "Ages 15-16" },
+    { id: "form-3b", name: "Form 3B", students: "Ages 15-16" },
+    { id: "form-3c", name: "Form 3C", students: "Ages 15-16" },
+    { id: "form-3d", name: "Form 3D", students: "Ages 15-16" },
+    { id: "form-4a", name: "Form 4A", students: "Ages 16-17" },
+    { id: "form-4b", name: "Form 4B", students: "Ages 16-17" },
+    { id: "form-4c", name: "Form 4C", students: "Ages 16-17" },
+    { id: "form-4d", name: "Form 4D", students: "Ages 16-17" }
   ];
 
   const timetableData = {
-    "form-1": {
+    "form-1a": {
       monday: ["Mathematics", "English", "Science", "BREAK", "History", "Geography", "Kiswahili", "LUNCH", "Art", "PE", "Study Hall"],
       tuesday: ["English", "Mathematics", "Biology", "BREAK", "Chemistry", "Physics", "Computer", "LUNCH", "Music", "French", "Library"],
       wednesday: ["Science", "Mathematics", "English", "BREAK", "Social Studies", "Religious Ed", "Kiswahili", "LUNCH", "Drama", "Art", "Study Hall"],
       thursday: ["Mathematics", "English", "Physics", "BREAK", "Chemistry", "Biology", "Geography", "LUNCH", "PE", "Computer", "Study Hall"],
       friday: ["English", "Science", "Mathematics", "BREAK", "History", "Art", "Music", "LUNCH", "French", "Study Hall", "Assembly"]
     },
-    "form-2": {
+    "form-1b": {
+      monday: ["English", "Mathematics", "Science", "BREAK", "Geography", "History", "Kiswahili", "LUNCH", "PE", "Art", "Study Hall"],
+      tuesday: ["Mathematics", "English", "Biology", "BREAK", "Physics", "Chemistry", "Computer", "LUNCH", "French", "Music", "Library"],
+      wednesday: ["Mathematics", "Science", "English", "BREAK", "Religious Ed", "Social Studies", "Kiswahili", "LUNCH", "Art", "Drama", "Study Hall"],
+      thursday: ["English", "Mathematics", "Physics", "BREAK", "Biology", "Chemistry", "Geography", "LUNCH", "Computer", "PE", "Study Hall"],
+      friday: ["Science", "English", "Mathematics", "BREAK", "Art", "History", "Music", "LUNCH", "Study Hall", "French", "Assembly"]
+    },
+    "form-1c": {
+      monday: ["Science", "Mathematics", "English", "BREAK", "Kiswahili", "Geography", "History", "LUNCH", "Art", "PE", "Study Hall"],
+      tuesday: ["Mathematics", "Science", "Biology", "BREAK", "Chemistry", "Physics", "Computer", "LUNCH", "Music", "French", "Library"],
+      wednesday: ["English", "Mathematics", "Science", "BREAK", "Social Studies", "Religious Ed", "Kiswahili", "LUNCH", "Drama", "Art", "Study Hall"],
+      thursday: ["Mathematics", "English", "Physics", "BREAK", "Chemistry", "Biology", "Geography", "LUNCH", "PE", "Computer", "Study Hall"],
+      friday: ["Mathematics", "Science", "English", "BREAK", "History", "Art", "Music", "LUNCH", "French", "Study Hall", "Assembly"]
+    },
+    "form-1d": {
+      monday: ["English", "Science", "Mathematics", "BREAK", "History", "Geography", "Kiswahili", "LUNCH", "PE", "Art", "Study Hall"],
+      tuesday: ["Science", "Mathematics", "Biology", "BREAK", "Physics", "Chemistry", "Computer", "LUNCH", "French", "Music", "Library"],
+      wednesday: ["Mathematics", "English", "Science", "BREAK", "Religious Ed", "Social Studies", "Kiswahili", "LUNCH", "Art", "Drama", "Study Hall"],
+      thursday: ["Science", "Mathematics", "Physics", "BREAK", "Biology", "Chemistry", "Geography", "LUNCH", "Computer", "PE", "Study Hall"],
+      friday: ["English", "Mathematics", "Science", "BREAK", "Art", "History", "Music", "LUNCH", "Study Hall", "French", "Assembly"]
+    },
+    "form-2a": {
       monday: ["Advanced Math", "English Lit", "Biology", "BREAK", "Chemistry", "Physics", "Geography", "LUNCH", "Computer Sci", "PE", "Study Hall"],
       tuesday: ["English Lang", "Mathematics", "Chemistry", "BREAK", "Biology", "Physics", "History", "LUNCH", "Art", "French", "Library"],
       wednesday: ["Science", "Mathematics", "English", "BREAK", "Geography", "Religious Ed", "Kiswahili", "LUNCH", "Drama", "Music", "Study Hall"],
       thursday: ["Mathematics", "English", "Physics", "BREAK", "Chemistry", "Biology", "Computer Sci", "LUNCH", "PE", "Art", "Study Hall"],
       friday: ["English", "Advanced Math", "Science", "BREAK", "History", "Geography", "Music", "LUNCH", "French", "Study Hall", "Assembly"]
     },
-    "form-3": {
+    "form-2b": {
+      monday: ["English Lit", "Advanced Math", "Biology", "BREAK", "Physics", "Chemistry", "Geography", "LUNCH", "PE", "Computer Sci", "Study Hall"],
+      tuesday: ["Mathematics", "English Lang", "Chemistry", "BREAK", "Physics", "Biology", "History", "LUNCH", "French", "Art", "Library"],
+      wednesday: ["Mathematics", "Science", "English", "BREAK", "Religious Ed", "Geography", "Kiswahili", "LUNCH", "Music", "Drama", "Study Hall"],
+      thursday: ["English", "Mathematics", "Physics", "BREAK", "Biology", "Chemistry", "Computer Sci", "LUNCH", "Art", "PE", "Study Hall"],
+      friday: ["Advanced Math", "English", "Science", "BREAK", "Geography", "History", "Music", "LUNCH", "Study Hall", "French", "Assembly"]
+    },
+    "form-2c": {
+      monday: ["Biology", "Advanced Math", "English Lit", "BREAK", "Chemistry", "Physics", "Geography", "LUNCH", "Computer Sci", "PE", "Study Hall"],
+      tuesday: ["Chemistry", "English Lang", "Mathematics", "BREAK", "Biology", "Physics", "History", "LUNCH", "Art", "French", "Library"],
+      wednesday: ["English", "Mathematics", "Science", "BREAK", "Geography", "Religious Ed", "Kiswahili", "LUNCH", "Drama", "Music", "Study Hall"],
+      thursday: ["Physics", "English", "Mathematics", "BREAK", "Chemistry", "Biology", "Computer Sci", "LUNCH", "PE", "Art", "Study Hall"],
+      friday: ["Science", "Advanced Math", "English", "BREAK", "History", "Geography", "Music", "LUNCH", "French", "Study Hall", "Assembly"]
+    },
+    "form-2d": {
+      monday: ["Mathematics", "Biology", "English Lit", "BREAK", "Physics", "Chemistry", "Geography", "LUNCH", "PE", "Computer Sci", "Study Hall"],
+      tuesday: ["English Lang", "Chemistry", "Mathematics", "BREAK", "Physics", "Biology", "History", "LUNCH", "French", "Art", "Library"],
+      wednesday: ["Science", "English", "Mathematics", "BREAK", "Religious Ed", "Geography", "Kiswahili", "LUNCH", "Music", "Drama", "Study Hall"],
+      thursday: ["Mathematics", "Physics", "English", "BREAK", "Biology", "Chemistry", "Computer Sci", "LUNCH", "Art", "PE", "Study Hall"],
+      friday: ["English", "Science", "Advanced Math", "BREAK", "Geography", "History", "Music", "LUNCH", "Study Hall", "French", "Assembly"]
+    },
+    "form-3a": {
       monday: ["Pure Math", "English Lit", "Biology", "BREAK", "Chemistry", "Physics", "Economics", "LUNCH", "Computer Sci", "PE", "Tutorials"],
       tuesday: ["English Lang", "Mathematics", "Chemistry", "BREAK", "Biology", "Physics", "History", "LUNCH", "Geography", "French", "Library"],
       wednesday: ["Applied Math", "English", "Science", "BREAK", "Economics", "Business", "Kiswahili", "LUNCH", "Drama", "Music", "Study Hall"],
       thursday: ["Mathematics", "English", "Physics", "BREAK", "Chemistry", "Biology", "Computer Sci", "LUNCH", "PE", "Economics", "Tutorials"],
       friday: ["English", "Pure Math", "Science", "BREAK", "History", "Geography", "Business", "LUNCH", "French", "Study Hall", "Assembly"]
     },
-    "form-4": {
+    "form-3b": {
+      monday: ["English Lit", "Pure Math", "Biology", "BREAK", "Physics", "Chemistry", "Economics", "LUNCH", "PE", "Computer Sci", "Tutorials"],
+      tuesday: ["Mathematics", "English Lang", "Chemistry", "BREAK", "Physics", "Biology", "History", "LUNCH", "French", "Geography", "Library"],
+      wednesday: ["English", "Applied Math", "Science", "BREAK", "Business", "Economics", "Kiswahili", "LUNCH", "Music", "Drama", "Study Hall"],
+      thursday: ["English", "Mathematics", "Physics", "BREAK", "Biology", "Chemistry", "Computer Sci", "LUNCH", "Economics", "PE", "Tutorials"],
+      friday: ["Pure Math", "English", "Science", "BREAK", "Geography", "History", "Business", "LUNCH", "Study Hall", "French", "Assembly"]
+    },
+    "form-3c": {
+      monday: ["Biology", "Pure Math", "English Lit", "BREAK", "Chemistry", "Physics", "Economics", "LUNCH", "Computer Sci", "PE", "Tutorials"],
+      tuesday: ["Chemistry", "English Lang", "Mathematics", "BREAK", "Biology", "Physics", "History", "LUNCH", "Geography", "French", "Library"],
+      wednesday: ["Science", "Applied Math", "English", "BREAK", "Economics", "Business", "Kiswahili", "LUNCH", "Drama", "Music", "Study Hall"],
+      thursday: ["Physics", "English", "Mathematics", "BREAK", "Chemistry", "Biology", "Computer Sci", "LUNCH", "PE", "Economics", "Tutorials"],
+      friday: ["Science", "Pure Math", "English", "BREAK", "History", "Geography", "Business", "LUNCH", "French", "Study Hall", "Assembly"]
+    },
+    "form-3d": {
+      monday: ["Mathematics", "Biology", "English Lit", "BREAK", "Physics", "Chemistry", "Economics", "LUNCH", "PE", "Computer Sci", "Tutorials"],
+      tuesday: ["English Lang", "Chemistry", "Mathematics", "BREAK", "Physics", "Biology", "History", "LUNCH", "French", "Geography", "Library"],
+      wednesday: ["Applied Math", "Science", "English", "BREAK", "Business", "Economics", "Kiswahili", "LUNCH", "Music", "Drama", "Study Hall"],
+      thursday: ["Mathematics", "Physics", "English", "BREAK", "Biology", "Chemistry", "Computer Sci", "LUNCH", "Economics", "PE", "Tutorials"],
+      friday: ["English", "Science", "Pure Math", "BREAK", "Geography", "History", "Business", "LUNCH", "Study Hall", "French", "Assembly"]
+    },
+    "form-4a": {
       monday: ["Advanced Math", "English Lit", "Biology", "BREAK", "Chemistry", "Physics", "Economics", "LUNCH", "Computer Sci", "Career Guid", "Exam Prep"],
       tuesday: ["English Lang", "Mathematics", "Chemistry", "BREAK", "Biology", "Physics", "History", "LUNCH", "Geography", "French", "Library"],
       wednesday: ["Pure Math", "English", "Science", "BREAK", "Business", "Economics", "Kiswahili", "LUNCH", "Leadership", "Music", "Study Hall"],
       thursday: ["Mathematics", "English", "Physics", "BREAK", "Chemistry", "Biology", "Computer Sci", "LUNCH", "PE", "Career Guid", "Exam Prep"],
       friday: ["English", "Advanced Math", "Science", "BREAK", "History", "Geography", "Business", "LUNCH", "French", "Study Hall", "Assembly"]
+    },
+    "form-4b": {
+      monday: ["English Lit", "Advanced Math", "Biology", "BREAK", "Physics", "Chemistry", "Economics", "LUNCH", "Career Guid", "Computer Sci", "Exam Prep"],
+      tuesday: ["Mathematics", "English Lang", "Chemistry", "BREAK", "Physics", "Biology", "History", "LUNCH", "French", "Geography", "Library"],
+      wednesday: ["English", "Pure Math", "Science", "BREAK", "Economics", "Business", "Kiswahili", "LUNCH", "Music", "Leadership", "Study Hall"],
+      thursday: ["English", "Mathematics", "Physics", "BREAK", "Biology", "Chemistry", "Computer Sci", "LUNCH", "Career Guid", "PE", "Exam Prep"],
+      friday: ["Advanced Math", "English", "Science", "BREAK", "Geography", "History", "Business", "LUNCH", "Study Hall", "French", "Assembly"]
+    },
+    "form-4c": {
+      monday: ["Biology", "Advanced Math", "English Lit", "BREAK", "Chemistry", "Physics", "Economics", "LUNCH", "Computer Sci", "Career Guid", "Exam Prep"],
+      tuesday: ["Chemistry", "English Lang", "Mathematics", "BREAK", "Biology", "Physics", "History", "LUNCH", "Geography", "French", "Library"],
+      wednesday: ["Science", "Pure Math", "English", "BREAK", "Business", "Economics", "Kiswahili", "LUNCH", "Leadership", "Music", "Study Hall"],
+      thursday: ["Physics", "English", "Mathematics", "BREAK", "Chemistry", "Biology", "Computer Sci", "LUNCH", "PE", "Career Guid", "Exam Prep"],
+      friday: ["Science", "Advanced Math", "English", "BREAK", "History", "Geography", "Business", "LUNCH", "French", "Study Hall", "Assembly"]
+    },
+    "form-4d": {
+      monday: ["Mathematics", "Biology", "English Lit", "BREAK", "Physics", "Chemistry", "Economics", "LUNCH", "Career Guid", "Computer Sci", "Exam Prep"],
+      tuesday: ["English Lang", "Chemistry", "Mathematics", "BREAK", "Physics", "Biology", "History", "LUNCH", "French", "Geography", "Library"],
+      wednesday: ["Pure Math", "Science", "English", "BREAK", "Economics", "Business", "Kiswahili", "LUNCH", "Music", "Leadership", "Study Hall"],
+      thursday: ["Mathematics", "Physics", "English", "BREAK", "Biology", "Chemistry", "Computer Sci", "LUNCH", "Career Guid", "PE", "Exam Prep"],
+      friday: ["English", "Science", "Advanced Math", "BREAK", "Geography", "History", "Business", "LUNCH", "Study Hall", "French", "Assembly"]
     }
   };
 
