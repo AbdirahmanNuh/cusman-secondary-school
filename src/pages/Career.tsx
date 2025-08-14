@@ -13,118 +13,53 @@ const Career = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [departmentFilter, setDepartmentFilter] = useState("all");
 
-  const jobPostings = [
-    {
-      id: 1,
-      title: "Mathematics Teacher",
-      department: "Mathematics",
-      type: "Full-time",
-      location: "Main Campus",
-      experience: "2-5 years",
-      deadline: "2024-09-15",
-      description: "We are seeking a passionate Mathematics teacher to join our dynamic team. The ideal candidate will have strong subject knowledge and excellent communication skills.",
-      requirements: [
-        "Bachelor's degree in Mathematics or related field",
-        "Teaching certification required",
-        "Minimum 2 years teaching experience",
-        "Strong classroom management skills"
-      ],
-      responsibilities: [
-        "Plan and deliver engaging mathematics lessons",
-        "Assess student progress and provide feedback",
-        "Participate in school activities and events",
-        "Collaborate with colleagues and parents"
-      ]
-    },
-    {
-      id: 2,
-      title: "English Language Teacher",
-      department: "English",
-      type: "Full-time",
-      location: "Main Campus",
-      experience: "3-7 years",
-      deadline: "2024-09-20",
-      description: "Join our English department as an experienced teacher who can inspire students to develop their language and literature skills.",
-      requirements: [
-        "Bachelor's degree in English or Literature",
-        "Teaching certification required",
-        "Minimum 3 years teaching experience",
-        "Native or near-native English proficiency"
-      ],
-      responsibilities: [
-        "Teach English language and literature",
-        "Develop curriculum and lesson plans",
-        "Organize literary events and competitions",
-        "Mentor student publications"
-      ]
-    },
-    {
-      id: 3,
-      title: "Science Laboratory Assistant",
-      department: "Science",
-      type: "Part-time",
-      location: "Science Block",
-      experience: "1-3 years",
-      deadline: "2024-08-30",
-      description: "Support our science department by maintaining laboratory equipment and assisting with practical sessions.",
-      requirements: [
-        "Diploma in Science or related field",
-        "Laboratory experience preferred",
-        "Knowledge of safety procedures",
-        "Attention to detail"
-      ],
-      responsibilities: [
-        "Prepare laboratory equipment for classes",
-        "Maintain inventory of chemicals and materials",
-        "Ensure laboratory safety standards",
-        "Assist teachers during practical sessions"
-      ]
-    },
-    {
-      id: 4,
-      title: "Physical Education Teacher",
-      department: "Physical Education",
-      type: "Full-time",
-      location: "Sports Complex",
-      experience: "2-5 years",
-      deadline: "2024-09-10",
-      description: "Lead our physical education program and coach various sports teams to promote student fitness and teamwork.",
-      requirements: [
-        "Bachelor's degree in Physical Education",
-        "Sports coaching certification",
-        "First aid certification",
-        "Strong leadership skills"
-      ],
-      responsibilities: [
-        "Conduct physical education classes",
-        "Coach school sports teams",
-        "Organize sports events and competitions",
-        "Promote student health and fitness"
-      ]
-    },
-    {
-      id: 5,
-      title: "Librarian",
-      department: "Library",
-      type: "Full-time",
-      location: "Main Library",
-      experience: "2-4 years",
-      deadline: "2024-09-25",
-      description: "Manage our school library and promote reading culture among students and staff.",
-      requirements: [
-        "Bachelor's degree in Library Science",
-        "Library management experience",
-        "Computer literacy",
-        "Excellent organizational skills"
-      ],
-      responsibilities: [
-        "Manage library resources and catalog",
-        "Assist students and staff with research",
-        "Organize reading programs and events",
-        "Maintain digital and physical collections"
-      ]
-    }
-  ];
+  const jobPostings = [
+    {
+      id: 1,
+      title: "Mathematics Teacher",
+      department: "Mathematics",
+      type: "Full-time",
+      experience: "2-5 years",
+      deadline: "2024-09-15",
+      salary: "Competitive"
+    },
+    {
+      id: 2,
+      title: "English Language Teacher",
+      department: "English",
+      type: "Full-time",
+      experience: "3-7 years",
+      deadline: "2024-09-20",
+      salary: "Competitive"
+    },
+    {
+      id: 3,
+      title: "Science Laboratory Assistant",
+      department: "Science",
+      type: "Part-time",
+      experience: "1-3 years",
+      deadline: "2024-08-30",
+      salary: "Hourly Rate"
+    },
+    {
+      id: 4,
+      title: "Physical Education Teacher",
+      department: "Physical Education",
+      type: "Full-time",
+      experience: "2-5 years",
+      deadline: "2024-09-10",
+      salary: "Competitive"
+    },
+    {
+      id: 5,
+      title: "Librarian",
+      department: "Library",
+      type: "Full-time",
+      experience: "2-4 years",
+      deadline: "2024-09-25",
+      salary: "Competitive"
+    }
+  ];
 
   const departments = ["all", "Mathematics", "English", "Science", "Physical Education", "Library"];
 
@@ -185,45 +120,47 @@ const Career = () => {
           </div>
         </div>
 
-        {/* Job Listings */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {filteredJobs.map((job) => (
-            <Card key={job.id} className="hover:shadow-lg transition-shadow border border-border bg-card">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-xl text-foreground font-semibold mb-2">
-                  {job.title}
-                </CardTitle>
-                <CardDescription className="text-muted-foreground leading-relaxed min-h-[60px]">
-                  {job.description.length > 100 
-                    ? `${job.description.substring(0, 100)}...` 
-                    : job.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <Badge variant="outline">{job.department}</Badge>
-                </div>
-                
-                <div className="space-y-2 mb-6">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Clock className="h-4 w-4" />
-                    <span>Apply by {new Date(job.deadline).toLocaleDateString()}</span>
-                  </div>
-                </div>
+        {/* Job Listings */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {filteredJobs.map((job) => (
+            <Card key={job.id} className="hover:shadow-lg transition-shadow border border-border bg-card group">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg font-semibold text-foreground mb-1">
+                  {job.title}
+                </CardTitle>
+                <Badge className={getTypeColor(job.type)} variant="secondary">
+                  {job.type}
+                </Badge>
+              </CardHeader>
+              <CardContent className="pt-2">
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium text-muted-foreground">Experience</span>
+                    <span className="text-sm text-foreground">{job.experience}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium text-muted-foreground">Salary</span>
+                    <span className="text-sm text-foreground">{job.salary}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground pt-2">
+                    <Clock className="h-4 w-4" />
+                    <span>Deadline: {new Date(job.deadline).toLocaleDateString()}</span>
+                  </div>
+                </div>
 
-                <Link to={`/career/${job.id}`}>
-                  <Button 
-                    variant="ghost" 
-                    className="text-blue-700 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto font-bold group"
-                  >
-                    View Details
-                    <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+                <Link to={`/career/${job.id}`} className="block mt-4">
+                  <Button 
+                    variant="outline" 
+                    className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
+                  >
+                    Apply Now
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
 
         {/* No Results */}
         {filteredJobs.length === 0 && (
