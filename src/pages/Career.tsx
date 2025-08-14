@@ -135,10 +135,8 @@ const Career = () => {
     return matchesSearch && matchesDepartment;
   });
 
-   const getTypeColor = (type: string) => {
-    return type === "Full-time" 
-      ? "bg-blue-600 text-white" 
-      : "bg-yellow-500 text-blue-900";
+  const getTypeColor = (type: string) => {
+    return type === "Full-time" ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground";
   };
 
   return (
@@ -146,33 +144,33 @@ const Career = () => {
       <Header />
       
       <main className="container mx-auto px-4 py-12">
-        {/* Header Section with Brand Colors */}
+        {/* Header Section */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-blue-800 mb-4">
+          <h1 className="text-4xl font-bold text-foreground mb-4">
             Career Opportunities
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Join our dedicated team of educators and staff members who are committed to providing 
             excellence in education and shaping the future of our students.
           </p>
         </div>
 
-        {/* Search and Filter Section with Brand Styling */}
-        <div className="mb-8 bg-blue-50 border border-blue-200 p-6 rounded-lg">
+        {/* Search and Filter Section */}
+        <div className="mb-8 bg-muted/30 p-6 rounded-lg">
           <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
             <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-500 h-4 w-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
               <Input
                 placeholder="Search positions..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 border-blue-300 focus:border-blue-500 focus:ring-blue-500"
+                className="pl-10"
               />
             </div>
             <div className="flex items-center gap-2">
-              <Filter className="h-4 w-4 text-blue-600" />
+              <Filter className="h-4 w-4 text-muted-foreground" />
               <Select value={departmentFilter} onValueChange={setDepartmentFilter}>
-                <SelectTrigger className="w-48 border-blue-300 focus:border-blue-500">
+                <SelectTrigger className="w-48">
                   <SelectValue placeholder="Filter by department" />
                 </SelectTrigger>
                 <SelectContent>
@@ -187,15 +185,15 @@ const Career = () => {
           </div>
         </div>
 
-        {/* Job Listings with Brand Colors */}
+        {/* Job Listings */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {filteredJobs.map((job) => (
-            <Card key={job.id} className="hover:shadow-lg transition-shadow border border-blue-200 bg-white hover:border-blue-300">
+            <Card key={job.id} className="hover:shadow-lg transition-shadow border border-border bg-card">
               <CardHeader className="pb-4">
-                <CardTitle className="text-xl text-blue-800 font-semibold mb-2">
+                <CardTitle className="text-xl text-foreground font-semibold mb-2">
                   {job.title}
                 </CardTitle>
-                <CardDescription className="text-gray-600 leading-relaxed min-h-[60px]">
+                <CardDescription className="text-muted-foreground leading-relaxed min-h-[60px]">
                   {job.description.length > 100 
                     ? `${job.description.substring(0, 100)}...` 
                     : job.description}
@@ -203,21 +201,19 @@ const Career = () => {
               </CardHeader>
               <CardContent className="pt-0">
                 <div className="flex flex-wrap gap-2 mb-4">
-                  <Badge className={getTypeColor(job.type)}>
+                  <Badge className={getTypeColor(job.type)} variant="secondary">
                     {job.type}
                   </Badge>
-                  <Badge variant="outline" className="border-green-500 text-green-700">
-                    {job.department}
-                  </Badge>
+                  <Badge variant="outline">{job.department}</Badge>
                 </div>
                 
                 <div className="space-y-2 mb-6">
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <MapPin className="h-4 w-4 text-blue-500" />
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <MapPin className="h-4 w-4" />
                     <span>{job.location}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <Clock className="h-4 w-4 text-blue-500" />
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Clock className="h-4 w-4" />
                     <span>Apply by {new Date(job.deadline).toLocaleDateString()}</span>
                   </div>
                 </div>
@@ -225,7 +221,7 @@ const Career = () => {
                 <Link to={`/career/${job.id}`}>
                   <Button 
                     variant="ghost" 
-                    className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 p-0 h-auto font-medium group"
+                    className="text-orange-600 hover:text-orange-700 hover:bg-orange-50 p-0 h-auto font-medium group"
                   >
                     View Details
                     <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -239,62 +235,62 @@ const Career = () => {
         {/* No Results */}
         {filteredJobs.length === 0 && (
           <div className="text-center py-12">
-            <h3 className="text-xl font-semibold text-blue-800 mb-2">No positions found</h3>
-            <p className="text-gray-600">
+            <h3 className="text-xl font-semibold text-foreground mb-2">No positions found</h3>
+            <p className="text-muted-foreground">
               Try adjusting your search criteria or check back later for new opportunities.
             </p>
           </div>
         )}
 
-        {/* Application Process with Brand Colors */}
-        <div className="mt-16 bg-gradient-to-r from-blue-50 to-yellow-50 border border-blue-200 rounded-lg p-8">
-          <h2 className="text-2xl font-bold text-blue-800 mb-6 text-center">
+        {/* Application Process */}
+        <div className="mt-16 bg-muted/30 rounded-lg p-8">
+          <h2 className="text-2xl font-bold text-foreground mb-6 text-center">
             Application Process
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4 font-bold text-lg">
+              <div className="bg-primary text-primary-foreground rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4 font-bold text-lg">
                 1
               </div>
-              <h3 className="font-semibold text-blue-800 mb-2">Submit Application</h3>
-              <p className="text-sm text-gray-600">
+              <h3 className="font-semibold text-foreground mb-2">Submit Application</h3>
+              <p className="text-sm text-muted-foreground">
                 Click "Apply Now" and fill out our online application form with your details and qualifications.
               </p>
             </div>
             <div className="text-center">
-              <div className="bg-yellow-500 text-blue-900 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4 font-bold text-lg">
+              <div className="bg-primary text-primary-foreground rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4 font-bold text-lg">
                 2
               </div>
-              <h3 className="font-semibold text-blue-800 mb-2">Interview Process</h3>
-              <p className="text-sm text-gray-600">
+              <h3 className="font-semibold text-foreground mb-2">Interview Process</h3>
+              <p className="text-sm text-muted-foreground">
                 Qualified candidates will be contacted for an interview with our hiring committee.
               </p>
             </div>
             <div className="text-center">
-              <div className="bg-green-600 text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4 font-bold text-lg">
+              <div className="bg-primary text-primary-foreground rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4 font-bold text-lg">
                 3
               </div>
-              <h3 className="font-semibold text-blue-800 mb-2">Join Our Team</h3>
-              <p className="text-sm text-gray-600">
+              <h3 className="font-semibold text-foreground mb-2">Join Our Team</h3>
+              <p className="text-sm text-muted-foreground">
                 Successful candidates will receive an offer and begin their journey with our school.
               </p>
             </div>
           </div>
         </div>
 
-        {/* Contact Information with Brand Colors */}
+        {/* Contact Information */}
         <div className="mt-12 text-center">
-          <h3 className="text-xl font-semibold text-blue-800 mb-4">
+          <h3 className="text-xl font-semibold text-foreground mb-4">
             Questions About Careers?
           </h3>
-          <p className="text-gray-600 mb-4">
+          <p className="text-muted-foreground mb-4">
             Contact our Human Resources department for more information about career opportunities.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
+            <Button variant="outline">
               Email: hr@cusmanschool.edu
             </Button>
-            <Button variant="outline" className="border-yellow-500 text-yellow-700 hover:bg-yellow-50">
+            <Button variant="outline">
               Phone: +252 61 234 5678
             </Button>
           </div>
