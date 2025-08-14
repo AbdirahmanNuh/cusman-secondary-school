@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, GraduationCap, ChevronDown } from "lucide-react";
+import { Menu, X, GraduationCap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
