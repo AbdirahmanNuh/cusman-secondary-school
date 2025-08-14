@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MapPin, Clock, Users, GraduationCap, Search, Filter, ArrowRight } from "lucide-react";
+import { Clock, Search, Filter, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -201,17 +201,10 @@ const Career = () => {
               </CardHeader>
               <CardContent className="pt-0">
                 <div className="flex flex-wrap gap-2 mb-4">
-                  <Badge className={getTypeColor(job.type)} variant="secondary">
-                    {job.type}
-                  </Badge>
                   <Badge variant="outline">{job.department}</Badge>
                 </div>
                 
                 <div className="space-y-2 mb-6">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <MapPin className="h-4 w-4" />
-                    <span>{job.location}</span>
-                  </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Clock className="h-4 w-4" />
                     <span>Apply by {new Date(job.deadline).toLocaleDateString()}</span>
@@ -221,7 +214,7 @@ const Career = () => {
                 <Link to={`/career/${job.id}`}>
                   <Button 
                     variant="ghost" 
-                    className="text-amber-600 hover:text-amber-700 hover:bg-amber-50 p-0 h-auto font-bold group"
+                    className="text-blue-700 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto font-bold group"
                   >
                     View Details
                     <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
