@@ -221,7 +221,7 @@ const Career = () => {
                 <Link to={`/career/${job.id}`}>
                   <Button 
                     variant="ghost" 
-                    className="text-amber-600 hover:text-amber-700 hover:bg-amber-50 p-0 h-auto font-bold group"
+                    className="text-blue-700 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto font-bold group"
                   >
                     View Details
                     <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
