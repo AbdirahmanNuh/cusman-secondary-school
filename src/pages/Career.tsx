@@ -242,41 +242,7 @@ const Career = () => {
           </div>
         )}
 
-        {/* Application Process */}
-        <div className="mt-16 bg-muted/30 rounded-lg p-8">
-          <h2 className="text-2xl font-bold text-foreground mb-6 text-center">
-            Application Process
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="bg-primary text-primary-foreground rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4 font-bold text-lg">
-                1
-              </div>
-              <h3 className="font-semibold text-foreground mb-2">Submit Application</h3>
-              <p className="text-sm text-muted-foreground">
-                Click "Apply Now" and fill out our online application form with your details and qualifications.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="bg-primary text-primary-foreground rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4 font-bold text-lg">
-                2
-              </div>
-              <h3 className="font-semibold text-foreground mb-2">Interview Process</h3>
-              <p className="text-sm text-muted-foreground">
-                Qualified candidates will be contacted for an interview with our hiring committee.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="bg-primary text-primary-foreground rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4 font-bold text-lg">
-                3
-              </div>
-              <h3 className="font-semibold text-foreground mb-2">Join Our Team</h3>
-              <p className="text-sm text-muted-foreground">
-                Successful candidates will receive an offer and begin their journey with our school.
-              </p>
-            </div>
-          </div>
-        </div>
+        
 
         {/* Contact Information */}
         <div className="mt-12 text-center">
