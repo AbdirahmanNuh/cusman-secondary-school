@@ -11,6 +11,7 @@ import Timetable from "./pages/Timetable";
 import Curriculum from "./pages/Curriculum";
 import Gallery from "./pages/Gallery";
 import NewsEvents from "./pages/NewsEvents";
+import CalendarPage from "./pages/Calendar";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/timetable" element={<Timetable />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/news" element={<NewsEvents />} />
+          <Route path="/calendar" element={<CalendarPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
