@@ -15,6 +15,7 @@ import CalendarPage from "./pages/Calendar";
 import Contact from "./pages/Contact";
 import EnrollNow from "./pages/EnrollNow";
 import Career from "./pages/Career";
+import JobDetail from "./pages/JobDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/enroll" element={<EnrollNow />} />
           <Route path="/career" element={<Career />} />
+          <Route path="/career/:id" element={<JobDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

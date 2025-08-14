@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MapPin, Clock, Users, GraduationCap, Search, Filter } from "lucide-react";
+import { MapPin, Clock, Users, GraduationCap, Search, Filter, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -185,35 +186,31 @@ const Career = () => {
         </div>
 
         {/* Job Listings */}
-        <div className="grid gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {filteredJobs.map((job) => (
-            <Card key={job.id} className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                  <div>
-                    <CardTitle className="text-xl text-foreground">{job.title}</CardTitle>
-                    <CardDescription className="text-muted-foreground mt-1">
-                      {job.description}
-                    </CardDescription>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge className={getTypeColor(job.type)}>
-                      {job.type}
-                    </Badge>
-                    <Badge variant="outline">{job.department}</Badge>
-                  </div>
-                </div>
+            <Card key={job.id} className="hover:shadow-lg transition-shadow border border-border bg-card">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-xl text-foreground font-semibold mb-2">
+                  {job.title}
+                </CardTitle>
+                <CardDescription className="text-muted-foreground leading-relaxed min-h-[60px]">
+                  {job.description.length > 100 
+                    ? `${job.description.substring(0, 100)}...` 
+                    : job.description}
+                </CardDescription>
               </CardHeader>
-              <CardContent>
-                {/* Job Details */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <CardContent className="pt-0">
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <Badge className={getTypeColor(job.type)} variant="secondary">
+                    {job.type}
+                  </Badge>
+                  <Badge variant="outline">{job.department}</Badge>
+                </div>
+                
+                <div className="space-y-2 mb-6">
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <MapPin className="h-4 w-4" />
                     <span>{job.location}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Users className="h-4 w-4" />
-                    <span>{job.experience}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Clock className="h-4 w-4" />
@@ -221,33 +218,15 @@ const Career = () => {
                   </div>
                 </div>
 
-                {/* Requirements and Responsibilities */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2">Requirements:</h4>
-                    <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
-                      {job.requirements.map((req, index) => (
-                        <li key={index}>{req}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2">Responsibilities:</h4>
-                    <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
-                      {job.responsibilities.map((resp, index) => (
-                        <li key={index}>{resp}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Apply Button */}
-                <div className="flex justify-end">
-                  <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-                    <GraduationCap className="mr-2 h-4 w-4" />
-                    Apply Now
+                <Link to={`/career/${job.id}`}>
+                  <Button 
+                    variant="ghost" 
+                    className="text-orange-600 hover:text-orange-700 hover:bg-orange-50 p-0 h-auto font-medium group"
+                  >
+                    View Details
+                    <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
-                </div>
+                </Link>
               </CardContent>
             </Card>
           ))}
