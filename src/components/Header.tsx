@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, GraduationCap } from "lucide-react";
+import { Menu, X, GraduationCap, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 import schoolLogo from "@/assets/school-logo.png";
 
 const Header = () => {
@@ -10,16 +18,25 @@ const Header = () => {
 
   const navigationItems = [
     { name: "Home", path: "/" },
+    { name: "Career", path: "/career" },
+    { name: "Contact", path: "/contact" },
+  ];
+
+  const aboutUsItems = [
     { name: "About Us", path: "/about" },
     { name: "Principal's Message", path: "/principal" },
+  ];
+
+  const academicsItems = [
     { name: "Curriculum", path: "/curriculum" },
-    { name: "Admissions", path: "/admissions" },
     { name: "Timetable", path: "/timetable" },
+    { name: "Admissions", path: "/admissions" },
+  ];
+
+  const schoolLifeItems = [
+    { name: "Events", path: "/news" },
     { name: "Calendar", path: "/calendar" },
-    { name: "News & Events", path: "/news" },
-    { name: "Career", path: "/career" },
     { name: "Gallery", path: "/gallery" },
-    { name: "Contact", path: "/contact" },
   ];
 
   const isActivePage = (path: string) => location.pathname === path;
@@ -44,21 +61,97 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-1">
-            {navigationItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-elegant ${
-                  isActivePage(item.path)
-                    ? "bg-primary text-primary-foreground"
-                    : "text-foreground hover:bg-muted hover:text-primary"
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
+          <NavigationMenu className="hidden lg:flex">
+            <NavigationMenuList>
+              {navigationItems.map((item) => (
+                <NavigationMenuItem key={item.path}>
+                  <Link to={item.path}>
+                    <NavigationMenuLink
+                      className={`px-3 py-2 rounded-md text-sm font-medium transition-elegant ${
+                        isActivePage(item.path)
+                          ? "bg-primary text-primary-foreground"
+                          : "text-foreground hover:bg-muted hover:text-primary"
+                      }`}
+                    >
+                      {item.name}
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+              ))}
+              
+              {/* About Us Dropdown */}
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="text-sm font-medium">
+                  About Us
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <div className="w-48 p-2">
+                    {aboutUsItems.map((item) => (
+                      <Link key={item.path} to={item.path}>
+                        <NavigationMenuLink
+                          className={`block px-3 py-2 rounded-md text-sm font-medium transition-elegant ${
+                            isActivePage(item.path)
+                              ? "bg-primary text-primary-foreground"
+                              : "text-foreground hover:bg-muted hover:text-primary"
+                          }`}
+                        >
+                          {item.name}
+                        </NavigationMenuLink>
+                      </Link>
+                    ))}
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              {/* Academics Dropdown */}
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="text-sm font-medium">
+                  Academics
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <div className="w-48 p-2">
+                    {academicsItems.map((item) => (
+                      <Link key={item.path} to={item.path}>
+                        <NavigationMenuLink
+                          className={`block px-3 py-2 rounded-md text-sm font-medium transition-elegant ${
+                            isActivePage(item.path)
+                              ? "bg-primary text-primary-foreground"
+                              : "text-foreground hover:bg-muted hover:text-primary"
+                          }`}
+                        >
+                          {item.name}
+                        </NavigationMenuLink>
+                      </Link>
+                    ))}
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              {/* School Life Dropdown */}
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="text-sm font-medium">
+                  School Life
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <div className="w-48 p-2">
+                    {schoolLifeItems.map((item) => (
+                      <Link key={item.path} to={item.path}>
+                        <NavigationMenuLink
+                          className={`block px-3 py-2 rounded-md text-sm font-medium transition-elegant ${
+                            isActivePage(item.path)
+                              ? "bg-primary text-primary-foreground"
+                              : "text-foreground hover:bg-muted hover:text-primary"
+                          }`}
+                        >
+                          {item.name}
+                        </NavigationMenuLink>
+                      </Link>
+                    ))}
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center space-x-4">
@@ -102,6 +195,64 @@ const Header = () => {
                   {item.name}
                 </Link>
               ))}
+              
+              {/* About Us Section */}
+              <div className="px-3 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                About Us
+              </div>
+              {aboutUsItems.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`pl-6 pr-3 py-2 rounded-md text-sm font-medium transition-elegant ${
+                    isActivePage(item.path)
+                      ? "bg-primary text-primary-foreground"
+                      : "text-foreground hover:bg-muted hover:text-primary"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              
+              {/* Academics Section */}
+              <div className="px-3 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                Academics
+              </div>
+              {academicsItems.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`pl-6 pr-3 py-2 rounded-md text-sm font-medium transition-elegant ${
+                    isActivePage(item.path)
+                      ? "bg-primary text-primary-foreground"
+                      : "text-foreground hover:bg-muted hover:text-primary"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              
+              {/* School Life Section */}
+              <div className="px-3 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                School Life
+              </div>
+              {schoolLifeItems.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`pl-6 pr-3 py-2 rounded-md text-sm font-medium transition-elegant ${
+                    isActivePage(item.path)
+                      ? "bg-primary text-primary-foreground"
+                      : "text-foreground hover:bg-muted hover:text-primary"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              
               <Link 
                 to="/enroll" 
                 onClick={() => setIsMenuOpen(false)}
