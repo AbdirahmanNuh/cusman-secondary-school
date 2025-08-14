@@ -144,114 +144,52 @@ const Career = () => {
       <Header />
       
       <main className="container mx-auto px-4 py-12">
-        {/* Header Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-foreground mb-4">
-            Career Opportunities
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Join our dedicated team of educators and staff members who are committed to providing 
-            excellence in education and shaping the future of our students.
-          </p>
-        </div>
+        {/* Header Section */}
+        <div className="text-center mb-16">
+          <h1 className="text-5xl font-bold mb-6">
+            Join Our <span className="text-orange-500">Team</span>
+          </h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            We are looking for passionate professionals to join our vibrant learning community.
+          </p>
+        </div>
 
-        {/* Search and Filter Section */}
-        <div className="mb-8 bg-muted/30 p-6 rounded-lg">
-          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-              <Input
-                placeholder="Search positions..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
-              />
-            </div>
-            <div className="flex items-center gap-2">
-              <Filter className="h-4 w-4 text-muted-foreground" />
-              <Select value={departmentFilter} onValueChange={setDepartmentFilter}>
-                <SelectTrigger className="w-48">
-                  <SelectValue placeholder="Filter by department" />
-                </SelectTrigger>
-                <SelectContent>
-                  {departments.map((dept) => (
-                    <SelectItem key={dept} value={dept}>
-                      {dept === "all" ? "All Departments" : dept}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-        </div>
+        {/* Job Listings */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          {filteredJobs.slice(0, 3).map((job) => (
+            <Card key={job.id} className="bg-gray-50 border-0 p-8 hover:shadow-md transition-shadow">
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-teal-700 mb-4">
+                  {job.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {job.description.length > 100 
+                    ? `${job.description.substring(0, 100)}...` 
+                    : job.description}
+                </p>
+              </div>
 
-        {/* Job Listings */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {filteredJobs.map((job) => (
-            <Card key={job.id} className="hover:shadow-lg transition-shadow border border-border bg-card">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-xl text-foreground font-semibold mb-2">
-                  {job.title}
-                </CardTitle>
-                <CardDescription className="text-muted-foreground leading-relaxed min-h-[60px]">
-                  {job.description.length > 100 
-                    ? `${job.description.substring(0, 100)}...` 
-                    : job.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <Badge variant="outline">{job.department}</Badge>
-                </div>
-                
-                <div className="space-y-2 mb-6">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Clock className="h-4 w-4" />
-                    <span>Apply by {new Date(job.deadline).toLocaleDateString()}</span>
-                  </div>
-                </div>
+              <Link to={`/career/${job.id}`}>
+                <Button 
+                  variant="ghost" 
+                  className="text-orange-500 hover:text-orange-600 p-0 h-auto font-medium group"
+                >
+                  View Details →
+                </Button>
+              </Link>
+            </Card>
+          ))}
+        </div>
 
-                <Link to={`/career/${job.id}`}>
-                  <Button 
-                    variant="ghost" 
-                    className="text-blue-700 hover:text-blue-800 hover:bg-blue-50 p-0 h-auto font-bold group"
-                  >
-                    View Details
-                    <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {/* No Results */}
-        {filteredJobs.length === 0 && (
-          <div className="text-center py-12">
-            <h3 className="text-xl font-semibold text-foreground mb-2">No positions found</h3>
-            <p className="text-muted-foreground">
-              Try adjusting your search criteria or check back later for new opportunities.
-            </p>
-          </div>
-        )}
-
-        {/* Contact Information */}
-        <div className="mt-12 text-center">
-          <h3 className="text-xl font-semibold text-foreground mb-4">
-            Questions About Careers?
-          </h3>
-          <p className="text-muted-foreground mb-4">
-            Contact our Human Resources department for more information about career opportunities.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="outline">
-              Email: hr@cusmanschool.edu
-            </Button>
-            <Button variant="outline">
-              Phone: +252 61 234 5678
-            </Button>
-          </div>
-        </div>
+        {/* General Application Section */}
+        <div className="text-center mb-12">
+          <p className="text-lg text-gray-600 mb-6">
+            Don't see a role that fits? We welcome general applications.
+          </p>
+          <Button className="bg-teal-700 hover:bg-teal-800 text-white px-8 py-3 rounded-md text-base font-medium">
+            Submit General Application
+          </Button>
+        </div>
       </main>
 
       <Footer />
