@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Calendar } from "@/components/ui/calendar";
 import { Separator } from "@/components/ui/separator";
 import { 
   Calendar as CalendarIcon, 
@@ -12,16 +11,17 @@ import {
   ChevronLeft, 
   ChevronRight,
   Plus,
-  Filter
+  Filter,
+  List
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { format, isSameDay, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth } from "date-fns";
+import { format, isSameDay, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isToday, isFuture, isPast } from "date-fns";
 
 const CalendarPage = () => {
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [viewDate, setViewDate] = useState<Date>(new Date());
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [viewMode, setViewMode] = useState<'upcoming' | 'month' | 'all'>('upcoming');
 
   const categories = [
     { id: "all", name: "All Events", color: "bg-gray-100 text-gray-800" },
@@ -139,21 +139,29 @@ const CalendarPage = () => {
     ? events 
     : events.filter(event => event.category === selectedCategory);
 
-  const selectedDateEvents = filteredEvents.filter(event => 
-    isSameDay(event.date, selectedDate || new Date())
-  );
+  const getFilteredEventsByMode = () => {
+    switch (viewMode) {
+      case 'upcoming':
+        return filteredEvents.filter(event => isFuture(event.date) || isToday(event.date));
+      case 'month':
+        return filteredEvents.filter(event => isSameMonth(event.date, viewDate));
+      case 'all':
+      default:
+        return filteredEvents;
+    }
+  };
 
-  const monthEvents = filteredEvents.filter(event => 
-    isSameMonth(event.date, viewDate)
-  );
+  const displayEvents = getFilteredEventsByMode().sort((a, b) => a.date.getTime() - b.date.getTime());
 
   const getCategoryColor = (category: string) => {
     const categoryData = categories.find(cat => cat.id === category);
     return categoryData?.color || "bg-gray-100 text-gray-800";
   };
 
-  const getEventsForDate = (date: Date) => {
-    return filteredEvents.filter(event => isSameDay(event.date, date));
+  const getEventStatus = (eventDate: Date) => {
+    if (isToday(eventDate)) return 'today';
+    if (isFuture(eventDate)) return 'upcoming';
+    return 'past';
   };
 
   const navigateMonth = (direction: 'prev' | 'next') => {
@@ -215,115 +223,223 @@ const CalendarPage = () => {
               </Button>
             </div>
 
-            {/* Category Filter */}
+            {/* View Mode Toggle */}
             <div className="flex flex-wrap gap-2">
-              {categories.map((category) => (
-                <Button
-                  key={category.id}
-                  variant={selectedCategory === category.id ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setSelectedCategory(category.id)}
-                  className="text-xs"
-                >
-                  <Filter className="h-3 w-3 mr-1" />
-                  {category.name}
-                </Button>
-              ))}
+              <Button
+                variant={viewMode === 'upcoming' ? "default" : "outline"}
+                size="sm"
+                onClick={() => setViewMode('upcoming')}
+                className="text-xs"
+              >
+                <List className="h-3 w-3 mr-1" />
+                Upcoming
+              </Button>
+              <Button
+                variant={viewMode === 'month' ? "default" : "outline"}
+                size="sm"
+                onClick={() => setViewMode('month')}
+                className="text-xs"
+              >
+                <CalendarIcon className="h-3 w-3 mr-1" />
+                This Month
+              </Button>
+              <Button
+                variant={viewMode === 'all' ? "default" : "outline"}
+                size="sm"
+                onClick={() => setViewMode('all')}
+                className="text-xs"
+              >
+                <Filter className="h-3 w-3 mr-1" />
+                All Events
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Main Calendar Section */}
+      {/* Category Filter */}
+      <section className="py-4 bg-background border-b">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-wrap justify-center gap-2">
+            {categories.map((category) => (
+              <Button
+                key={category.id}
+                variant={selectedCategory === category.id ? "default" : "outline"}
+                size="sm"
+                onClick={() => setSelectedCategory(category.id)}
+                className="text-xs"
+              >
+                <Filter className="h-3 w-3 mr-1" />
+                {category.name}
+              </Button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Events List */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Calendar */}
-            <div className="lg:col-span-2">
-              <Card className="overflow-hidden">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-primary">
-                    <CalendarIcon className="h-5 w-5" />
-                    {format(viewDate, 'MMMM yyyy')}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <Calendar
-                    mode="single"
-                    selected={selectedDate}
-                    onSelect={setSelectedDate}
-                    month={viewDate}
-                    onMonthChange={setViewDate}
-                    className="rounded-md border w-full"
-                    modifiers={{
-                      hasEvents: (date) => getEventsForDate(date).length > 0
-                    }}
-                    modifiersStyles={{
-                      hasEvents: {
-                        fontWeight: 'bold',
-                        backgroundColor: 'hsl(var(--secondary) / 0.1)',
-                        color: 'hsl(var(--secondary))'
-                      }
-                    }}
-                  />
-                  
-                  {/* Event Indicators */}
-                  <div className="mt-4 p-4 bg-muted rounded-lg">
-                    <h4 className="font-semibold text-sm mb-2">Event Legend:</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {categories.slice(1).map((category) => (
-                        <div key={category.id} className="flex items-center gap-1 text-xs">
-                          <div className={`w-3 h-3 rounded-full ${category.color.split(' ')[0]}`}></div>
-                          <span>{category.name}</span>
-                        </div>
-                      ))}
-                    </div>
+          <div className="grid lg:grid-cols-4 gap-8">
+            {/* Events List */}
+            <div className="lg:col-span-3">
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <h2 className="font-academic text-2xl font-bold text-primary">
+                    {viewMode === 'upcoming' && 'Upcoming Events'}
+                    {viewMode === 'month' && `Events for ${format(viewDate, 'MMMM yyyy')}`}
+                    {viewMode === 'all' && 'All Events'}
+                    <span className="text-lg font-normal text-muted-foreground ml-2">
+                      ({displayEvents.length} events)
+                    </span>
+                  </h2>
+                </div>
+
+                {displayEvents.length > 0 ? (
+                  <div className="space-y-4">
+                    {displayEvents.map((event) => {
+                      const eventStatus = getEventStatus(event.date);
+                      return (
+                        <Card 
+                          key={event.id} 
+                          className={`transition-all duration-300 hover:shadow-lg ${
+                            eventStatus === 'today' ? 'ring-2 ring-secondary' : 
+                            eventStatus === 'past' ? 'opacity-75' : ''
+                          }`}
+                        >
+                          <CardContent className="p-6">
+                            <div className="flex flex-col md:flex-row md:items-start gap-4">
+                              {/* Date Section */}
+                              <div className="flex-shrink-0">
+                                <div className={`text-center p-3 rounded-lg ${
+                                  eventStatus === 'today' ? 'bg-secondary text-secondary-foreground' :
+                                  eventStatus === 'upcoming' ? 'bg-primary/10 text-primary' :
+                                  'bg-muted text-muted-foreground'
+                                }`}>
+                                  <div className="text-xs font-medium uppercase tracking-wide">
+                                    {format(event.date, 'MMM')}
+                                  </div>
+                                  <div className="text-2xl font-bold">
+                                    {format(event.date, 'd')}
+                                  </div>
+                                  <div className="text-xs">
+                                    {format(event.date, 'yyyy')}
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Event Details */}
+                              <div className="flex-1 space-y-3">
+                                <div className="flex items-start justify-between gap-4">
+                                  <div>
+                                    <h3 className="font-semibold text-xl text-foreground mb-1">
+                                      {event.title}
+                                    </h3>
+                                    <div className="flex items-center gap-2 mb-2">
+                                      <Badge className={`text-xs ${getCategoryColor(event.category)}`}>
+                                        {event.category}
+                                      </Badge>
+                                      {eventStatus === 'today' && (
+                                        <Badge variant="secondary" className="text-xs">
+                                          Today
+                                        </Badge>
+                                      )}
+                                      {eventStatus === 'past' && (
+                                        <Badge variant="outline" className="text-xs">
+                                          Past Event
+                                        </Badge>
+                                      )}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <p className="text-muted-foreground leading-relaxed">
+                                  {event.description}
+                                </p>
+
+                                <div className="grid md:grid-cols-3 gap-4 text-sm">
+                                  <div className="flex items-center gap-2">
+                                    <Clock className="h-4 w-4 text-secondary" />
+                                    <span>{event.time}</span>
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <MapPin className="h-4 w-4 text-secondary" />
+                                    <span>{event.location}</span>
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <Users className="h-4 w-4 text-secondary" />
+                                    <span>{event.attendees}</span>
+                                  </div>
+                                </div>
+
+                                <Separator />
+
+                                <div className="flex items-center justify-between">
+                                  <div className="text-sm text-muted-foreground">
+                                    {format(event.date, 'EEEE, MMMM d, yyyy')}
+                                  </div>
+                                  <Button variant="outline" size="sm">
+                                    View Details
+                                  </Button>
+                                </div>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      );
+                    })}
                   </div>
-                </CardContent>
-              </Card>
+                ) : (
+                  <div className="text-center py-12">
+                    <CalendarIcon className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+                    <h3 className="font-semibold text-lg text-muted-foreground mb-2">No Events Found</h3>
+                    <p className="text-muted-foreground">
+                      {viewMode === 'upcoming' && "There are no upcoming events."}
+                      {viewMode === 'month' && `No events scheduled for ${format(viewDate, 'MMMM yyyy')}.`}
+                      {viewMode === 'all' && "No events match your current filter."}
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
 
-            {/* Selected Date Events */}
+            {/* Sidebar */}
             <div className="space-y-6">
-              {/* Selected Date Info */}
+              {/* Quick Stats */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg">
-                    {selectedDate ? format(selectedDate, 'EEEE, MMMM d, yyyy') : 'Select a date'}
-                  </CardTitle>
+                  <CardTitle className="text-lg">Event Summary</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  {selectedDateEvents.length > 0 ? (
-                    <div className="space-y-4">
-                      {selectedDateEvents.map((event) => (
-                        <div key={event.id} className="border-l-4 border-secondary pl-4">
-                          <div className="flex items-start justify-between gap-2 mb-2">
-                            <h4 className="font-semibold text-sm">{event.title}</h4>
-                            <Badge className={`text-xs ${getCategoryColor(event.category)}`}>
-                              {event.category}
-                            </Badge>
-                          </div>
-                          <div className="space-y-1 text-xs text-muted-foreground">
-                            <div className="flex items-center gap-1">
-                              <Clock className="h-3 w-3" />
-                              <span>{event.time}</span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <MapPin className="h-3 w-3" />
-                              <span>{event.location}</span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <Users className="h-3 w-3" />
-                              <span>{event.attendees}</span>
-                            </div>
-                          </div>
-                          <p className="text-xs text-muted-foreground mt-2">{event.description}</p>
-                        </div>
-                      ))}
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4 text-center">
+                    <div>
+                      <div className="text-2xl font-bold text-primary">
+                        {filteredEvents.filter(e => isFuture(e.date) || isToday(e.date)).length}
+                      </div>
+                      <div className="text-xs text-muted-foreground">Upcoming</div>
                     </div>
-                  ) : (
-                    <p className="text-muted-foreground text-sm">No events scheduled for this date.</p>
-                  )}
+                    <div>
+                      <div className="text-2xl font-bold text-secondary">
+                        {filteredEvents.filter(e => isSameMonth(e.date, new Date())).length}
+                      </div>
+                      <div className="text-xs text-muted-foreground">This Month</div>
+                    </div>
+                  </div>
+                  <Separator />
+                  <div className="space-y-2">
+                    {categories.slice(1).map((category) => {
+                      const count = filteredEvents.filter(e => e.category === category.id).length;
+                      return (
+                        <div key={category.id} className="flex items-center justify-between text-sm">
+                          <div className="flex items-center gap-2">
+                            <div className={`w-3 h-3 rounded-full ${category.color.split(' ')[0]}`}></div>
+                            <span>{category.name}</span>
+                          </div>
+                          <span className="font-medium">{count}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </CardContent>
               </Card>
 
@@ -349,64 +465,6 @@ const CalendarPage = () => {
               </Card>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Upcoming Events */}
-      <section className="py-16 bg-muted">
-        <div className="container mx-auto px-4">
-          <h2 className="font-academic text-3xl font-bold text-primary text-center mb-12">
-            Upcoming Events This Month
-          </h2>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {monthEvents
-              .filter(event => event.date >= new Date())
-              .sort((a, b) => a.date.getTime() - b.date.getTime())
-              .slice(0, 6)
-              .map((event) => (
-                <Card key={event.id} className="hover:shadow-lg transition-all duration-300">
-                  <CardHeader>
-                    <div className="flex items-start justify-between gap-2">
-                      <CardTitle className="text-lg line-clamp-2">{event.title}</CardTitle>
-                      <Badge className={`text-xs ${getCategoryColor(event.category)}`}>
-                        {event.category}
-                      </Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    <div className="space-y-2 text-sm">
-                      <div className="flex items-center gap-2">
-                        <CalendarIcon className="h-4 w-4 text-secondary" />
-                        <span>{format(event.date, 'EEEE, MMMM d, yyyy')}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Clock className="h-4 w-4 text-secondary" />
-                        <span>{event.time}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <MapPin className="h-4 w-4 text-secondary" />
-                        <span>{event.location}</span>
-                      </div>
-                    </div>
-                    <Separator />
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {event.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              ))}
-          </div>
-
-          {monthEvents.filter(event => event.date >= new Date()).length === 0 && (
-            <div className="text-center py-12">
-              <CalendarIcon className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-              <h3 className="font-semibold text-lg text-muted-foreground mb-2">No Upcoming Events</h3>
-              <p className="text-muted-foreground">
-                There are no events scheduled for this month. Check back later for updates.
-              </p>
-            </div>
-          )}
         </div>
       </section>
 
