@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MapPin, Clock, ArrowRight, Mail, Phone } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -14,50 +13,51 @@ const Career = () => {
   const jobPostings = [
     {
       id: 1,
-      title: "Mathematics Teacher",
-      department: "Mathematics",
-      type: "Full-time",
-      location: "Main Campus",
-      deadline: "2024-09-15",
+      title: "Primary School Teacher",
+      description: "Seeking an enthusiastic teacher to inspire young minds in core subjects.",
     },
     {
       id: 2,
-      title: "English Language Teacher",
-      department: "English",
-      type: "Full-time",
-      location: "Main Campus",
-      deadline: "2024-09-20",
+      title: "French Language Teacher",
+      description: "A passionate linguist to deliver engaging French lessons to primary students.",
     },
     {
       id: 3,
-      title: "Science Laboratory Assistant",
-      department: "Science",
-      type: "Part-time",
-      location: "Science Block",
-      deadline: "2024-08-30",
+      title: "School Administrator",
+      description: "An organized administrator to support our daily operations and parent communications.",
     },
     {
       id: 4,
-      title: "Physical Education Teacher",
-      department: "Physical Education",
-      type: "Full-time",
-      location: "Sports Complex",
-      deadline: "2024-09-10",
+      title: "Mathematics Teacher",
+      description: "Join our team to teach mathematics with creativity and passion.",
     },
     {
       id: 5,
-      title: "Librarian",
-      department: "Library",
-      type: "Full-time",
-      location: "Main Library",
-      deadline: "2024-09-25",
+      title: "Science Laboratory Assistant",
+      description: "Support our science department with laboratory management and student assistance.",
+    },
+    {
+      id: 6,
+      title: "Physical Education Teacher",
+      description: "Lead our sports programs and promote healthy, active lifestyles among students.",
     }
   ];
 
-  const departments = ["all", "Mathematics", "English", "Science", "Physical Education", "Library"];
+  const departments = ["all", "Teaching", "Administration", "Support Staff"];
 
   const filteredJobs = jobPostings.filter(job => {
-    return departmentFilter === "all" || job.department === departmentFilter;
+    if (departmentFilter === "all") return true;
+    // Simple categorization - you can make this more sophisticated
+    if (departmentFilter === "Teaching") {
+      return job.title.includes("Teacher");
+    }
+    if (departmentFilter === "Administration") {
+      return job.title.includes("Administrator");
+    }
+    if (departmentFilter === "Support Staff") {
+      return job.title.includes("Assistant");
+    }
+    return true;
   });
 
   return (
@@ -65,13 +65,13 @@ const Career = () => {
       <Header />
       
       <main className="container mx-auto px-4 py-12">
-        {/* Simplified Header */}
+        {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-foreground mb-4">
-            Join Our Team
+            Career Opportunities
           </h1>
           <p className="text-xl text-muted-foreground">
-            Discover exciting career opportunities at Cusman Secondary School
+            Join our dedicated team at Cusman Secondary School
           </p>
         </div>
 
@@ -79,40 +79,36 @@ const Career = () => {
         <div className="mb-8 flex justify-center">
           <Select value={departmentFilter} onValueChange={setDepartmentFilter}>
             <SelectTrigger className="w-64">
-              <SelectValue placeholder="Filter by department" />
+              <SelectValue placeholder="Filter by category" />
             </SelectTrigger>
             <SelectContent>
               {departments.map((dept) => (
                 <SelectItem key={dept} value={dept}>
-                  {dept === "all" ? "All Departments" : dept}
+                  {dept === "all" ? "All Positions" : dept}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
         </div>
 
-        {/* Simplified Job Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        {/* Clean Job Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {filteredJobs.map((job) => (
-            <Card key={job.id} className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle className="text-lg">{job.title}</CardTitle>
-                <Badge variant="outline" className="w-fit">{job.department}</Badge>
+            <Card key={job.id} className="hover:shadow-md transition-shadow bg-white border border-gray-200">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-xl font-semibold text-gray-900 mb-3">
+                  {job.title}
+                </CardTitle>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {job.description}
+                </p>
               </CardHeader>
-              <CardContent>
-                <div className="space-y-2 mb-4">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <MapPin className="h-4 w-4" />
-                    <span>{job.location}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Clock className="h-4 w-4" />
-                    <span>Apply by {new Date(job.deadline).toLocaleDateString()}</span>
-                  </div>
-                </div>
-
+              <CardContent className="pt-0">
                 <Link to={`/career/${job.id}`}>
-                  <Button variant="ghost" className="text-primary hover:text-primary/80 p-0 h-auto font-medium group">
+                  <Button 
+                    variant="ghost" 
+                    className="text-orange-600 hover:text-orange-700 hover:bg-orange-50 p-0 h-auto font-medium group"
+                  >
                     View Details
                     <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
@@ -125,26 +121,26 @@ const Career = () => {
         {/* No Results */}
         {filteredJobs.length === 0 && (
           <div className="text-center py-12">
-            <h3 className="text-xl font-semibold mb-2">No positions found</h3>
-            <p className="text-muted-foreground">
-              Check back later for new opportunities.
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">No positions found</h3>
+            <p className="text-gray-600">
+              Try selecting a different category or check back later.
             </p>
           </div>
         )}
 
-        {/* Simplified Contact Section */}
-        <div className="mt-16 text-center bg-muted/30 rounded-lg p-8">
-          <h2 className="text-2xl font-bold mb-4">Ready to Apply?</h2>
-          <p className="text-muted-foreground mb-6">
-            Contact our HR department for more information
+        {/* Simple Contact Section */}
+        <div className="text-center bg-gray-50 rounded-lg p-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Ready to Join Us?
+          </h2>
+          <p className="text-gray-600 mb-6">
+            Contact our HR department for more information about these positions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="outline" className="flex items-center gap-2">
-              <Mail className="h-4 w-4" />
+            <Button variant="outline" className="bg-white">
               hr@cusmanschool.edu
             </Button>
-            <Button variant="outline" className="flex items-center gap-2">
-              <Phone className="h-4 w-4" />
+            <Button variant="outline" className="bg-white">
               +252 61 234 5678
             </Button>
           </div>
