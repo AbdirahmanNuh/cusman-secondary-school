@@ -65,13 +65,15 @@ const Career = () => {
       <Header />
       
       <main className="container mx-auto px-4 py-12">
-        {/* Header with Brand Colors */}
+        {/* Header with Mixed Colors */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-primary mb-4">
-            Career Opportunities
+          <h1 className="text-4xl font-bold mb-4">
+            <span className="text-primary">Career</span>{" "}
+            <span className="text-secondary">Opportunities</span>
           </h1>
-          <p className="text-xl text-primary/80">
-            Join our dedicated team at Cusman Secondary School
+          <p className="text-xl">
+            <span className="text-accent">Join our dedicated team at</span>{" "}
+            <span className="text-primary font-semibold">Cusman Secondary School</span>
           </p>
         </div>
 
@@ -91,31 +93,40 @@ const Career = () => {
           </Select>
         </div>
 
-        {/* Clean Job Cards with Brand Colors */}
+        {/* Clean Job Cards with Mixed Colors */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {filteredJobs.map((job) => (
-            <Card key={job.id} className="hover:shadow-lg transition-shadow bg-card border hover:border-primary/20">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-xl font-semibold text-primary mb-3">
-                  {job.title}
-                </CardTitle>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {job.description}
-                </p>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <Link to={`/career/${job.id}`}>
-                  <Button 
-                    variant="ghost" 
-                    className="text-primary hover:text-primary/90 hover:bg-accent p-0 h-auto font-medium group"
-                  >
-                    View Details
-                    <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-          ))}
+          {filteredJobs.map((job, index) => {
+            const colors = [
+              { title: "text-primary", card: "hover:border-primary/20" },
+              { title: "text-secondary", card: "hover:border-secondary/20" },
+              { title: "text-accent", card: "hover:border-accent/20" }
+            ];
+            const colorScheme = colors[index % colors.length];
+            
+            return (
+              <Card key={job.id} className={`hover:shadow-lg transition-shadow bg-card border ${colorScheme.card}`}>
+                <CardHeader className="pb-4">
+                  <CardTitle className={`text-xl font-semibold ${colorScheme.title} mb-3`}>
+                    {job.title}
+                  </CardTitle>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {job.description}
+                  </p>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <Link to={`/career/${job.id}`}>
+                    <Button 
+                      variant="ghost" 
+                      className={`${colorScheme.title} hover:opacity-80 hover:bg-accent p-0 h-auto font-medium group`}
+                    >
+                      View Details
+                      <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
         {/* No Results with Brand Colors */}
@@ -128,10 +139,11 @@ const Career = () => {
           </div>
         )}
 
-        {/* Contact Section with Brand Colors */}
-        <div className="text-center bg-accent/30 border border-border rounded-lg p-8">
-          <h2 className="text-2xl font-bold text-primary mb-4">
-            Ready to Join Us?
+        {/* Contact Section with Mixed Colors */}
+        <div className="text-center bg-gradient-to-r from-accent/20 via-primary/10 to-secondary/20 border border-border rounded-lg p-8">
+          <h2 className="text-2xl font-bold mb-4">
+            <span className="text-primary">Ready to</span>{" "}
+            <span className="text-secondary">Join Us?</span>
           </h2>
           <p className="text-muted-foreground mb-6">
             Contact our HR department for more information about these positions.
@@ -140,7 +152,7 @@ const Career = () => {
             <Button variant="outline" className="border-primary text-primary hover:bg-primary/10">
               hr@cusmanschool.edu
             </Button>
-            <Button variant="outline" className="border-secondary text-secondary-foreground hover:bg-secondary/10">
+            <Button variant="outline" className="border-secondary text-secondary hover:bg-secondary/10">
               +252 61 234 5678
             </Button>
           </div>
