@@ -34,7 +34,7 @@ const Header = () => {
   ];
 
   const schoolLifeItems = [
-    { name: "Events", path: "/news" },
+    { name: "News", path: "/news" },
     { name: "Calendar", path: "/calendar" },
     { name: "Gallery", path: "/gallery" },
   ];

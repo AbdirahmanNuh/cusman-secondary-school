@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Calendar, Clock, MapPin, Users, ExternalLink, ArrowRight } from "lucide-react";
+import { Calendar, ExternalLink, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import schoolCampus from "@/assets/school-campus.jpg";
@@ -14,47 +14,11 @@ const NewsEvents = () => {
   const [activeTab, setActiveTab] = useState("all");
 
   const tabs = [
-    { id: "all", name: "All Updates" },
-    { id: "events", name: "Events" },
+    { id: "all", name: "All News" },
     { id: "news", name: "News" },
     { id: "announcements", name: "Announcements" },
   ];
 
-  const upcomingEvents = [
-    {
-      id: 1,
-      title: "Annual Science Fair 2024",
-      date: "2024-03-15",
-      time: "9:00 AM - 4:00 PM",
-      location: "Main Auditorium",
-      description: "Students will showcase their innovative science projects and research work.",
-      attendees: "All students and parents",
-      category: "academic",
-      image: studentsStudying,
-    },
-    {
-      id: 2,
-      title: "Parent-Teacher Conference",
-      date: "2024-03-22",
-      time: "2:00 PM - 6:00 PM",
-      location: "Classroom Building",
-      description: "Meet with teachers to discuss your child's academic progress and development.",
-      attendees: "Parents and guardians",
-      category: "meeting",
-      image: principalImage,
-    },
-    {
-      id: 3,
-      title: "Inter-School Sports Competition",
-      date: "2024-04-05",
-      time: "8:00 AM - 5:00 PM",
-      location: "School Sports Ground",
-      description: "Annual sports competition featuring athletics, football, and basketball.",
-      attendees: "Athletes and supporters",
-      category: "sports",
-      image: schoolCampus,
-    },
-  ];
 
   const newsArticles = [
     {
@@ -126,9 +90,7 @@ const NewsEvents = () => {
   ];
 
   const filteredContent = activeTab === "all" 
-    ? [...upcomingEvents.map(e => ({...e, type: 'event'})), ...newsArticles]
-    : activeTab === "events"
-    ? upcomingEvents.map(e => ({...e, type: 'event'}))
+    ? newsArticles
     : newsArticles.filter(article => article.type === activeTab);
 
   const sortedContent = filteredContent.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -163,11 +125,11 @@ const NewsEvents = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/90 to-primary-dark/90"></div>
         <div className="relative z-10 container mx-auto px-4 text-center">
           <h1 className="font-academic text-5xl md:text-6xl font-bold text-white mb-6">
-            News & Events
+            School News
           </h1>
           <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-            Stay updated with the latest happenings at Cusman Binu Cafaan Secondary School. 
-            Discover upcoming events, recent achievements, and important announcements.
+            Stay updated with the latest news from Cusman Binu Cafaan Secondary School. 
+            Discover recent achievements, important announcements, and school updates.
           </p>
         </div>
       </section>
@@ -190,67 +152,9 @@ const NewsEvents = () => {
         </div>
       </section>
 
-      {/* Upcoming Events Highlight */}
-      {(activeTab === "all" || activeTab === "events") && (
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <h2 className="font-academic text-3xl font-bold text-primary text-center mb-12">
-              Upcoming Events
-            </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {upcomingEvents.map((event) => (
-                <Card key={event.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 group">
-                  <div className="relative">
-                    <img
-                      src={event.image}
-                      alt={event.title}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <Badge className={`absolute top-4 right-4 ${getCategoryColor(event.category)}`}>
-                      {event.category}
-                    </Badge>
-                  </div>
-                  <CardHeader>
-                    <CardTitle className="text-xl group-hover:text-secondary transition-colors">
-                      {event.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <p className="text-muted-foreground">{event.description}</p>
-                    
-                    <div className="space-y-2 text-sm">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="h-4 w-4 text-secondary" />
-                        <span>{formatDate(event.date)}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Clock className="h-4 w-4 text-secondary" />
-                        <span>{event.time}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <MapPin className="h-4 w-4 text-secondary" />
-                        <span>{event.location}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Users className="h-4 w-4 text-secondary" />
-                        <span>{event.attendees}</span>
-                      </div>
-                    </div>
-                    
-                    <Button variant="outline" size="sm" className="w-full group">
-                      Learn More
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* News and Updates */}
-      <section className="py-16 bg-muted">
+      <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="font-academic text-3xl font-bold text-primary text-center mb-12">
             Latest News & Updates
@@ -258,7 +162,7 @@ const NewsEvents = () => {
           
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Featured Article */}
-            {sortedContent.length > 0 && sortedContent[0].type !== 'event' && (
+            {sortedContent.length > 0 && (
               <div className="lg:col-span-2">
                 <Card className="overflow-hidden hover:shadow-lg transition-all duration-300">
                   <div className="relative">
@@ -276,7 +180,7 @@ const NewsEvents = () => {
                       <Calendar className="h-4 w-4" />
                       <span>{formatDate(sortedContent[0].date)}</span>
                       <span>•</span>
-                      <span>By {sortedContent[0].type === 'event' ? 'School Administration' : (sortedContent[0] as any).author}</span>
+                      <span>By {(sortedContent[0] as any).author}</span>
                     </div>
                     <CardTitle className="text-2xl hover:text-secondary transition-colors cursor-pointer">
                       {sortedContent[0].title}
@@ -284,10 +188,10 @@ const NewsEvents = () => {
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground leading-relaxed mb-4">
-                      {sortedContent[0].type === 'event' ? (sortedContent[0] as any).description : (sortedContent[0] as any).excerpt}
+                      {(sortedContent[0] as any).excerpt}
                     </p>
                     <Button className="bg-secondary hover:bg-secondary-dark">
-                      {sortedContent[0].type === 'event' ? 'View Event Details' : 'Read Full Article'}
+                      Read Full Article
                       <ExternalLink className="ml-2 h-4 w-4" />
                     </Button>
                   </CardContent>
@@ -334,7 +238,7 @@ const NewsEvents = () => {
       </section>
 
       {/* Newsletter Signup */}
-      <section className="py-16">
+      <section className="py-16 bg-muted">
         <div className="container mx-auto px-4">
           <Card className="max-w-4xl mx-auto bg-gradient-to-br from-primary/5 to-secondary/5 border-none">
             <CardContent className="p-12 text-center">
@@ -342,7 +246,7 @@ const NewsEvents = () => {
                 Stay Connected
               </h2>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                Never miss important updates, events, or announcements. Join our mailing list 
+                Never miss important updates or announcements. Join our mailing list 
                 to receive the latest news directly to your inbox.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
