@@ -5,9 +5,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import FormSelector from "@/components/FormSelector";
 
 const Timetable = () => {
-  const [selectedClass, setSelectedClass] = useState("form-1a");
+  const [selectedClass, setSelectedClass] = useState("1A");
 
   const timeSlots = [
     "8:00 - 8:40",
@@ -23,24 +24,13 @@ const Timetable = () => {
     "2:20 - 3:00"
   ];
 
-  const classes = [
-    { id: "form-1a", name: "Form 1A", students: "Ages 13-14" },
-    { id: "form-1b", name: "Form 1B", students: "Ages 13-14" },
-    { id: "form-1c", name: "Form 1C", students: "Ages 13-14" },
-    { id: "form-1d", name: "Form 1D", students: "Ages 13-14" },
-    { id: "form-2a", name: "Form 2A", students: "Ages 14-15" },
-    { id: "form-2b", name: "Form 2B", students: "Ages 14-15" },
-    { id: "form-2c", name: "Form 2C", students: "Ages 14-15" },
-    { id: "form-2d", name: "Form 2D", students: "Ages 14-15" },
-    { id: "form-3a", name: "Form 3A", students: "Ages 15-16" },
-    { id: "form-3b", name: "Form 3B", students: "Ages 15-16" },
-    { id: "form-3c", name: "Form 3C", students: "Ages 15-16" },
-    { id: "form-3d", name: "Form 3D", students: "Ages 15-16" },
-    { id: "form-4a", name: "Form 4A", students: "Ages 16-17" },
-    { id: "form-4b", name: "Form 4B", students: "Ages 16-17" },
-    { id: "form-4c", name: "Form 4C", students: "Ages 16-17" },
-    { id: "form-4d", name: "Form 4D", students: "Ages 16-17" }
-  ];
+  // Map form selector values to timetable data keys
+  const formToTimetableMap = {
+    "1A": "form-1a", "1B": "form-1b", "1C": "form-1c", "1D": "form-1d",
+    "2A": "form-2a", "2B": "form-2b", "2C": "form-2c", "2D": "form-2d", 
+    "3A": "form-3a", "3B": "form-3b", "3C": "form-3c", "3D": "form-3d",
+    "4A": "form-4a", "4B": "form-4b", "4C": "form-4c", "4D": "form-4d"
+  };
 
   const timetableData = {
     "form-1a": {
@@ -207,18 +197,16 @@ const Timetable = () => {
       {/* Class Selection */}
       <section className="py-12 bg-muted">
         <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-4">
-            {classes.map((cls) => (
-              <Button
-                key={cls.id}
-                variant={selectedClass === cls.id ? "default" : "outline"}
-                onClick={() => setSelectedClass(cls.id)}
-                className="flex flex-col items-center p-4 h-auto"
-              >
-                <span className="font-semibold">{cls.name}</span>
-                <span className="text-xs opacity-80">{cls.students}</span>
-              </Button>
-            ))}
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-foreground mb-2">Select a class to view its weekly schedule</h2>
+            <p className="text-muted-foreground">Choose from Forms 1A to 4D to see the complete timetable</p>
+          </div>
+          <div className="flex justify-center">
+            <FormSelector 
+              onSelectionChange={setSelectedClass}
+              defaultValue="1A"
+              placeholder="Select your form level"
+            />
           </div>
         </div>
       </section>
@@ -228,7 +216,7 @@ const Timetable = () => {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-8">
             <h2 className="font-academic text-3xl font-bold text-primary">
-              {classes.find(c => c.id === selectedClass)?.name} Timetable
+              Form {selectedClass} Timetable
             </h2>
             <Button variant="outline" className="flex items-center gap-2">
               <Download className="h-4 w-4" />
@@ -262,7 +250,8 @@ const Timetable = () => {
                           {time}
                         </td>
                         {days.map((day) => {
-                          const currentTimetable = timetableData[selectedClass as keyof typeof timetableData];
+                          const timetableKey = formToTimetableMap[selectedClass as keyof typeof formToTimetableMap];
+                          const currentTimetable = timetableData[timetableKey as keyof typeof timetableData];
                           const subject = currentTimetable[day as keyof typeof currentTimetable][timeIndex];
                           const isBreak = subject === "BREAK" || subject === "LUNCH";
                           
