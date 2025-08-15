@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Users, BookOpen, Trophy, Globe, Microscope, Atom, Heart, Calculator, FileText, MessageCircle, Clock, Map, Star, Monitor } from "lucide-react";
+import { ArrowRight, Users, BookOpen, Trophy, Globe, Microscope, Atom, Heart, Calculator, FileText, MessageCircle, Clock, Map, Star, Monitor, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Header from "@/components/Header";
@@ -339,6 +339,99 @@ const Home = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* News & Events Section */}
+      <section className="py-20 bg-muted">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="font-academic text-4xl font-bold text-primary mb-4">
+              Latest News & Events
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Stay updated with our school's achievements, events, and important announcements
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Form 4 Students Excel in National Examinations",
+                description: "Congratulations to our Form 4 students who achieved outstanding results in the recent national examinations. Our school recorded a 98% pass rate with 15 students scoring straight A's!",
+                date: "Oct 10, 2025",
+                image: "/lovable-uploads/e505a976-40c2-4de7-bfa2-b139a5f04fad.png"
+              },
+              {
+                title: "Inter-School Mathematics Competition Victory",
+                description: "Our Form 3 students won first place in the regional mathematics competition, defeating 12 other schools. The team solved complex problems and demonstrated exceptional analytical skills.",
+                date: "Nov 15, 2025",
+                image: "/lovable-uploads/e505a976-40c2-4de7-bfa2-b139a5f04fad.png"
+              },
+              {
+                title: "Career Guidance Workshop for Form 4 Students",
+                description: "Our recent career guidance workshop for Form 4 students was a great success! Students explored various university options and career paths, receiving valuable advice from professionals.",
+                date: "Dec 5, 2025",
+                image: "/lovable-uploads/e505a976-40c2-4de7-bfa2-b139a5f04fad.png"
+              },
+              {
+                title: "New Science Laboratory Equipment",
+                description: "We've installed state-of-the-art laboratory equipment for Chemistry and Physics classes, enhancing our students' practical learning experience and scientific research capabilities.",
+                date: "Sep 20, 2025",
+                image: "/lovable-uploads/e505a976-40c2-4de7-bfa2-b139a5f04fad.png"
+              },
+              {
+                title: "Annual Sports Day Championship",
+                description: "Our annual sports day was a tremendous success with students showcasing their athletic talents. Form 3A emerged as the overall champions with outstanding performances across all events.",
+                date: "Aug 28, 2025",
+                image: "/lovable-uploads/e505a976-40c2-4de7-bfa2-b139a5f04fad.png"
+              },
+              {
+                title: "Islamic Studies Excellence Award",
+                description: "Our Islamic Studies department received recognition for excellence in teaching and student achievements. Three students won regional Quran recitation competitions this year.",
+                date: "Jul 15, 2025",
+                image: "/lovable-uploads/e505a976-40c2-4de7-bfa2-b139a5f04fad.png"
+              }
+            ].map((news, index) => (
+              <Card key={index} className="card-elegant hover:shadow-xl transition-elegant overflow-hidden">
+                <div className="aspect-video relative overflow-hidden">
+                  <img 
+                    src={news.image} 
+                    alt={news.title}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <CardContent className="p-6">
+                  <h3 className="font-bold text-lg text-primary mb-3 line-clamp-2">
+                    {news.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-3">
+                    {news.description}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Calendar className="h-4 w-4" />
+                      <span>{news.date}</span>
+                    </div>
+                    <Link to="/news-events">
+                      <Button variant="ghost" size="sm" className="text-primary hover:text-primary-dark">
+                        Read More →
+                      </Button>
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <Link to="/news-events">
+              <Button className="bg-primary hover:bg-primary-dark">
+                View All News & Events
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
