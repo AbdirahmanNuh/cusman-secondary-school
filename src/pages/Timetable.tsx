@@ -30,145 +30,132 @@ const Timetable = () => {
 
   const timetableData = {
     "form-1a": {
-      saturday: ["Mathematics", "English", "Science", "BREAK", "History", "Geography", "Kiswahili"],
-      sunday: ["English", "Mathematics", "Biology", "BREAK", "Chemistry", "Physics", "Computer"],
-      monday: ["Science", "Mathematics", "English", "BREAK", "Social Studies", "Religious Ed", "Kiswahili"],
-      tuesday: ["Mathematics", "English", "Physics", "BREAK", "Chemistry", "Biology", "Geography"],
-      wednesday: ["English", "Science", "Mathematics", "BREAK", "History", "Art", "Music"]
+      saturday: ["Mathematics", "English", "Somali", "BREAK", "Biology", "Islamic Studies", "History & Geography"],
+      sunday: ["English", "Chemistry", "Physics", "BREAK", "Mathematics", "Arabic", "Computer Studies"],
+      monday: ["Somali", "Biology", "English", "BREAK", "Chemistry", "Islamic Studies", "Mathematics"],
+      tuesday: ["Physics", "Mathematics", "Arabic", "BREAK", "History & Geography", "Computer Studies", "Somali"],
+      wednesday: ["Chemistry", "Somali", "Biology", "BREAK", "English", "Physics", "Islamic Studies"]
     },
     "form-1b": {
-      saturday: ["English", "Mathematics", "Science", "BREAK", "Geography", "History", "Kiswahili"],
-      sunday: ["Mathematics", "English", "Biology", "BREAK", "Physics", "Chemistry", "Computer"],
-      monday: ["Mathematics", "Science", "English", "BREAK", "Religious Ed", "Social Studies", "Kiswahili"],
-      tuesday: ["English", "Mathematics", "Physics", "BREAK", "Biology", "Chemistry", "Geography"],
-      wednesday: ["Science", "English", "Mathematics", "BREAK", "Art", "History", "Music"]
+      saturday: ["English", "Mathematics", "Biology", "BREAK", "Chemistry", "Somali", "Islamic Studies"],
+      sunday: ["Physics", "English", "Arabic", "BREAK", "Mathematics", "History & Geography", "Computer Studies"],
+      monday: ["Mathematics", "Somali", "Chemistry", "BREAK", "Biology", "Islamic Studies", "English"],
+      tuesday: ["English", "Physics", "Mathematics", "BREAK", "Arabic", "Computer Studies", "History & Geography"],
+      wednesday: ["Somali", "Biology", "English", "BREAK", "Chemistry", "Mathematics", "Islamic Studies"]
     },
     "form-1c": {
-      saturday: ["Science", "Mathematics", "English", "BREAK", "Kiswahili", "Geography", "History"],
-      sunday: ["Mathematics", "Science", "Biology", "BREAK", "Chemistry", "Physics", "Computer"],
-      monday: ["English", "Mathematics", "Science", "BREAK", "Social Studies", "Religious Ed", "Kiswahili"],
-      tuesday: ["Mathematics", "English", "Physics", "BREAK", "Chemistry", "Biology", "Geography"],
-      wednesday: ["Mathematics", "Science", "English", "BREAK", "History", "Art", "Music"]
+      saturday: ["Somali", "Chemistry", "Mathematics", "BREAK", "English", "Physics", "Biology"],
+      sunday: ["Mathematics", "Biology", "Islamic Studies", "BREAK", "Arabic", "Computer Studies", "History & Geography"],
+      monday: ["English", "Physics", "Somali", "BREAK", "Chemistry", "Mathematics", "Islamic Studies"],
+      tuesday: ["Biology", "English", "Mathematics", "BREAK", "Somali", "Arabic", "Computer Studies"],
+      wednesday: ["Physics", "Mathematics", "Chemistry", "BREAK", "Islamic Studies", "History & Geography", "English"]
     },
     "form-1d": {
-      saturday: ["English", "Science", "Mathematics", "BREAK", "History", "Geography", "Kiswahili"],
-      sunday: ["Science", "Mathematics", "Biology", "BREAK", "Physics", "Chemistry", "Computer"],
-      monday: ["Mathematics", "English", "Science", "BREAK", "Religious Ed", "Social Studies", "Kiswahili"],
-      tuesday: ["Science", "Mathematics", "Physics", "BREAK", "Biology", "Chemistry", "Geography"],
-      wednesday: ["English", "Mathematics", "Science", "BREAK", "Art", "History", "Music"]
+      saturday: ["Biology", "English", "Physics", "BREAK", "Mathematics", "Somali", "Chemistry"],
+      sunday: ["Somali", "Mathematics", "Computer Studies", "BREAK", "Islamic Studies", "Arabic", "History & Geography"],
+      monday: ["Chemistry", "Physics", "English", "BREAK", "Biology", "Mathematics", "Somali"],
+      tuesday: ["Mathematics", "Somali", "Islamic Studies", "BREAK", "English", "Chemistry", "Arabic"],
+      wednesday: ["English", "Biology", "Mathematics", "BREAK", "Physics", "Computer Studies", "History & Geography"]
     },
     "form-2a": {
-      saturday: ["Advanced Math", "English Lit", "Biology", "BREAK", "Chemistry", "Physics", "Geography"],
-      sunday: ["English Lang", "Mathematics", "Chemistry", "BREAK", "Biology", "Physics", "History"],
-      monday: ["Science", "Mathematics", "English", "BREAK", "Geography", "Religious Ed", "Kiswahili"],
-      tuesday: ["Mathematics", "English", "Physics", "BREAK", "Chemistry", "Biology", "Computer Sci"],
-      wednesday: ["English", "Advanced Math", "Science", "BREAK", "History", "Geography", "Music"]
+      saturday: ["Mathematics", "Chemistry", "English", "BREAK", "Physics", "Biology", "Islamic Studies"],
+      sunday: ["English", "Mathematics", "Arabic", "BREAK", "Somali", "Computer Studies", "History & Geography"],
+      monday: ["Physics", "Biology", "Mathematics", "BREAK", "Chemistry", "English", "Islamic Studies"],
+      tuesday: ["Somali", "English", "Physics", "BREAK", "Mathematics", "Arabic", "Computer Studies"],
+      wednesday: ["Chemistry", "Mathematics", "Biology", "BREAK", "Somali", "History & Geography", "Islamic Studies"]
     },
     "form-2b": {
-      saturday: ["English Lit", "Advanced Math", "Biology", "BREAK", "Physics", "Chemistry", "Geography"],
-      sunday: ["Mathematics", "English Lang", "Chemistry", "BREAK", "Physics", "Biology", "History"],
-      monday: ["Mathematics", "Science", "English", "BREAK", "Religious Ed", "Geography", "Kiswahili"],
-      tuesday: ["English", "Mathematics", "Physics", "BREAK", "Biology", "Chemistry", "Computer Sci"],
-      wednesday: ["Advanced Math", "English", "Science", "BREAK", "Geography", "History", "Music"]
+      saturday: ["English", "Physics", "Mathematics", "BREAK", "Chemistry", "Somali", "Biology"],
+      sunday: ["Mathematics", "English", "Islamic Studies", "BREAK", "Arabic", "History & Geography", "Computer Studies"],
+      monday: ["Chemistry", "Biology", "English", "BREAK", "Physics", "Mathematics", "Somali"],
+      tuesday: ["English", "Mathematics", "Chemistry", "BREAK", "Biology", "Islamic Studies", "Arabic"],
+      wednesday: ["Physics", "Somali", "Mathematics", "BREAK", "English", "Computer Studies", "History & Geography"]
     },
     "form-2c": {
-      saturday: ["Biology", "Advanced Math", "English Lit", "BREAK", "Chemistry", "Physics", "Geography"],
-      sunday: ["Chemistry", "English Lang", "Mathematics", "BREAK", "Biology", "Physics", "History"],
-      monday: ["English", "Mathematics", "Science", "BREAK", "Geography", "Religious Ed", "Kiswahili"],
-      tuesday: ["Physics", "English", "Mathematics", "BREAK", "Chemistry", "Biology", "Computer Sci"],
-      wednesday: ["Science", "Advanced Math", "English", "BREAK", "History", "Geography", "Music"]
+      saturday: ["Chemistry", "Mathematics", "Biology", "BREAK", "English", "Physics", "Somali"],
+      sunday: ["Biology", "English", "Computer Studies", "BREAK", "Mathematics", "Islamic Studies", "Arabic"],
+      monday: ["English", "Physics", "Chemistry", "BREAK", "Somali", "Mathematics", "History & Geography"],
+      tuesday: ["Mathematics", "Somali", "Biology", "BREAK", "Chemistry", "English", "Islamic Studies"],
+      wednesday: ["Physics", "Mathematics", "English", "BREAK", "Arabic", "Computer Studies", "Biology"]
     },
     "form-2d": {
-      saturday: ["Mathematics", "Biology", "English Lit", "BREAK", "Physics", "Chemistry", "Geography"],
-      sunday: ["English Lang", "Chemistry", "Mathematics", "BREAK", "Physics", "Biology", "History"],
-      monday: ["Science", "English", "Mathematics", "BREAK", "Religious Ed", "Geography", "Kiswahili"],
-      tuesday: ["Mathematics", "Physics", "English", "BREAK", "Biology", "Chemistry", "Computer Sci"],
-      wednesday: ["English", "Science", "Advanced Math", "BREAK", "Geography", "History", "Music"]
+      saturday: ["Physics", "English", "Mathematics", "BREAK", "Biology", "Chemistry", "Islamic Studies"],
+      sunday: ["Mathematics", "Somali", "History & Geography", "BREAK", "English", "Arabic", "Computer Studies"],
+      monday: ["Biology", "Chemistry", "Physics", "BREAK", "Mathematics", "Somali", "English"],
+      tuesday: ["English", "Mathematics", "Islamic Studies", "BREAK", "Physics", "Chemistry", "Arabic"],
+      wednesday: ["Somali", "Biology", "Mathematics", "BREAK", "Computer Studies", "History & Geography", "English"]
     },
     "form-3a": {
-      saturday: ["Pure Math", "English Lit", "Biology", "BREAK", "Chemistry", "Physics", "Economics"],
-      sunday: ["English Lang", "Mathematics", "Chemistry", "BREAK", "Biology", "Physics", "History"],
-      monday: ["Applied Math", "English", "Science", "BREAK", "Economics", "Business", "Kiswahili"],
-      tuesday: ["Mathematics", "English", "Physics", "BREAK", "Chemistry", "Biology", "Computer Sci"],
-      wednesday: ["English", "Pure Math", "Science", "BREAK", "History", "Geography", "Business"]
+      saturday: ["Mathematics", "Chemistry", "Physics", "BREAK", "Biology", "English", "Islamic Studies"],
+      sunday: ["English", "Mathematics", "Arabic", "BREAK", "Somali", "Computer Studies", "History & Geography"],
+      monday: ["Physics", "Biology", "Mathematics", "BREAK", "Chemistry", "English", "Islamic Studies"],
+      tuesday: ["Chemistry", "English", "Physics", "BREAK", "Mathematics", "Arabic", "Computer Studies"],
+      wednesday: ["Biology", "Mathematics", "English", "BREAK", "Somali", "History & Geography", "Islamic Studies"]
     },
     "form-3b": {
-      saturday: ["English Lit", "Pure Math", "Biology", "BREAK", "Physics", "Chemistry", "Economics"],
-      sunday: ["Mathematics", "English Lang", "Chemistry", "BREAK", "Physics", "Biology", "History"],
-      monday: ["English", "Applied Math", "Science", "BREAK", "Business", "Economics", "Kiswahili"],
-      tuesday: ["English", "Mathematics", "Physics", "BREAK", "Biology", "Chemistry", "Computer Sci"],
-      wednesday: ["Pure Math", "English", "Science", "BREAK", "Geography", "History", "Business"]
+      saturday: ["English", "Physics", "Chemistry", "BREAK", "Mathematics", "Biology", "Somali"],
+      sunday: ["Mathematics", "English", "Islamic Studies", "BREAK", "Arabic", "History & Geography", "Computer Studies"],
+      monday: ["Chemistry", "Biology", "English", "BREAK", "Physics", "Mathematics", "Somali"],
+      tuesday: ["English", "Mathematics", "Chemistry", "BREAK", "Biology", "Islamic Studies", "Arabic"],
+      wednesday: ["Physics", "Somali", "Mathematics", "BREAK", "English", "Computer Studies", "History & Geography"]
     },
     "form-3c": {
-      saturday: ["Biology", "Pure Math", "English Lit", "BREAK", "Chemistry", "Physics", "Economics"],
-      sunday: ["Chemistry", "English Lang", "Mathematics", "BREAK", "Biology", "Physics", "History"],
-      monday: ["Science", "Applied Math", "English", "BREAK", "Economics", "Business", "Kiswahili"],
-      tuesday: ["Physics", "English", "Mathematics", "BREAK", "Chemistry", "Biology", "Computer Sci"],
-      wednesday: ["Science", "Pure Math", "English", "BREAK", "History", "Geography", "Business"]
+      saturday: ["Chemistry", "Mathematics", "Biology", "BREAK", "English", "Physics", "Islamic Studies"],
+      sunday: ["Biology", "English", "Computer Studies", "BREAK", "Mathematics", "Arabic", "Somali"],
+      monday: ["English", "Physics", "Chemistry", "BREAK", "Somali", "Mathematics", "History & Geography"],
+      tuesday: ["Mathematics", "Somali", "Biology", "BREAK", "Chemistry", "English", "Islamic Studies"],
+      wednesday: ["Physics", "Mathematics", "English", "BREAK", "Arabic", "Computer Studies", "Biology"]
     },
     "form-3d": {
-      saturday: ["Mathematics", "Biology", "English Lit", "BREAK", "Physics", "Chemistry", "Economics"],
-      sunday: ["English Lang", "Chemistry", "Mathematics", "BREAK", "Physics", "Biology", "History"],
-      monday: ["Applied Math", "Science", "English", "BREAK", "Business", "Economics", "Kiswahili"],
-      tuesday: ["Mathematics", "Physics", "English", "BREAK", "Biology", "Chemistry", "Computer Sci"],
-      wednesday: ["English", "Science", "Pure Math", "BREAK", "Geography", "History", "Business"]
+      saturday: ["Physics", "English", "Mathematics", "BREAK", "Biology", "Chemistry", "Somali"],
+      sunday: ["Mathematics", "Somali", "History & Geography", "BREAK", "English", "Islamic Studies", "Computer Studies"],
+      monday: ["Biology", "Chemistry", "Physics", "BREAK", "Mathematics", "Somali", "English"],
+      tuesday: ["English", "Mathematics", "Arabic", "BREAK", "Physics", "Chemistry", "Islamic Studies"],
+      wednesday: ["Somali", "Biology", "Mathematics", "BREAK", "Computer Studies", "History & Geography", "English"]
     },
     "form-4a": {
-      saturday: ["Advanced Math", "English Lit", "Biology", "BREAK", "Chemistry", "Physics", "Economics"],
-      sunday: ["English Lang", "Mathematics", "Chemistry", "BREAK", "Biology", "Physics", "History"],
-      monday: ["Pure Math", "English", "Science", "BREAK", "Business", "Economics", "Kiswahili"],
-      tuesday: ["Mathematics", "English", "Physics", "BREAK", "Chemistry", "Biology", "Computer Sci"],
-      wednesday: ["English", "Advanced Math", "Science", "BREAK", "History", "Geography", "Business"]
+      saturday: ["Mathematics", "Chemistry", "Physics", "BREAK", "Biology", "English", "Islamic Studies"],
+      sunday: ["English", "Mathematics", "Arabic", "BREAK", "Somali", "Computer Studies", "History & Geography"],
+      monday: ["Physics", "Biology", "Mathematics", "BREAK", "Chemistry", "English", "Islamic Studies"],
+      tuesday: ["Chemistry", "English", "Physics", "BREAK", "Mathematics", "Arabic", "Computer Studies"],
+      wednesday: ["Biology", "Mathematics", "English", "BREAK", "Somali", "History & Geography", "Islamic Studies"]
     },
     "form-4b": {
-      saturday: ["English Lit", "Advanced Math", "Biology", "BREAK", "Physics", "Chemistry", "Economics"],
-      sunday: ["Mathematics", "English Lang", "Chemistry", "BREAK", "Physics", "Biology", "History"],
-      monday: ["English", "Pure Math", "Science", "BREAK", "Economics", "Business", "Kiswahili"],
-      tuesday: ["English", "Mathematics", "Physics", "BREAK", "Biology", "Chemistry", "Computer Sci"],
-      wednesday: ["Advanced Math", "English", "Science", "BREAK", "Geography", "History", "Business"]
+      saturday: ["English", "Physics", "Chemistry", "BREAK", "Mathematics", "Biology", "Somali"],
+      sunday: ["Mathematics", "English", "Islamic Studies", "BREAK", "Arabic", "History & Geography", "Computer Studies"],
+      monday: ["Chemistry", "Biology", "English", "BREAK", "Physics", "Mathematics", "Somali"],
+      tuesday: ["English", "Mathematics", "Chemistry", "BREAK", "Biology", "Islamic Studies", "Arabic"],
+      wednesday: ["Physics", "Somali", "Mathematics", "BREAK", "English", "Computer Studies", "History & Geography"]
     },
     "form-4c": {
-      saturday: ["Biology", "Advanced Math", "English Lit", "BREAK", "Chemistry", "Physics", "Economics"],
-      sunday: ["Chemistry", "English Lang", "Mathematics", "BREAK", "Biology", "Physics", "History"],
-      monday: ["Science", "Pure Math", "English", "BREAK", "Business", "Economics", "Kiswahili"],
-      tuesday: ["Physics", "English", "Mathematics", "BREAK", "Chemistry", "Biology", "Computer Sci"],
-      wednesday: ["Science", "Advanced Math", "English", "BREAK", "History", "Geography", "Business"]
+      saturday: ["Chemistry", "Mathematics", "Biology", "BREAK", "English", "Physics", "Islamic Studies"],
+      sunday: ["Biology", "English", "Computer Studies", "BREAK", "Mathematics", "Arabic", "Somali"],
+      monday: ["English", "Physics", "Chemistry", "BREAK", "Somali", "Mathematics", "History & Geography"],
+      tuesday: ["Mathematics", "Somali", "Biology", "BREAK", "Chemistry", "English", "Islamic Studies"],
+      wednesday: ["Physics", "Mathematics", "English", "BREAK", "Arabic", "Computer Studies", "Biology"]
     },
     "form-4d": {
-      saturday: ["Mathematics", "Biology", "English Lit", "BREAK", "Physics", "Chemistry", "Economics"],
-      sunday: ["English Lang", "Chemistry", "Mathematics", "BREAK", "Physics", "Biology", "History"],
-      monday: ["Pure Math", "Science", "English", "BREAK", "Economics", "Business", "Kiswahili"],
-      tuesday: ["Mathematics", "Physics", "English", "BREAK", "Biology", "Chemistry", "Computer Sci"],
-      wednesday: ["English", "Science", "Advanced Math", "BREAK", "Geography", "History", "Business"]
+      saturday: ["Physics", "English", "Mathematics", "BREAK", "Biology", "Chemistry", "Somali"],
+      sunday: ["Mathematics", "Somali", "History & Geography", "BREAK", "English", "Islamic Studies", "Computer Studies"],
+      monday: ["Biology", "Chemistry", "Physics", "BREAK", "Mathematics", "Somali", "English"],
+      tuesday: ["English", "Mathematics", "Arabic", "BREAK", "Physics", "Chemistry", "Islamic Studies"],
+      wednesday: ["Somali", "Biology", "Mathematics", "BREAK", "Computer Studies", "History & Geography", "English"]
     }
   };
 
   const getSubjectColor = (subject: string) => {
     const colors = {
-      "Mathematics": "bg-blue-100 text-blue-800",
-      "Advanced Math": "bg-blue-100 text-blue-800", 
-      "Pure Math": "bg-blue-100 text-blue-800",
-      "Applied Math": "bg-blue-100 text-blue-800",
-      "English": "bg-green-100 text-green-800",
-      "English Lit": "bg-green-100 text-green-800",
-      "English Lang": "bg-green-100 text-green-800",
-      "Science": "bg-purple-100 text-purple-800",
-      "Biology": "bg-emerald-100 text-emerald-800",
-      "Chemistry": "bg-orange-100 text-orange-800",
-      "Physics": "bg-red-100 text-red-800",
-      "History": "bg-amber-100 text-amber-800",
-      "Geography": "bg-teal-100 text-teal-800",
-      "Computer": "bg-indigo-100 text-indigo-800",
-      "BREAK": "bg-gray-100 text-gray-600",
-      "PE": "bg-lime-100 text-lime-800",
-      "Art": "bg-pink-100 text-pink-800",
-      "Music": "bg-violet-100 text-violet-800",
-      "French": "bg-cyan-100 text-cyan-800",
-      "Economics": "bg-yellow-100 text-yellow-800",
-      "Business": "bg-orange-100 text-orange-800",
-      "Religious Ed": "bg-purple-100 text-purple-800",
-      "Social Studies": "bg-slate-100 text-slate-800",
-      "Kiswahili": "bg-emerald-100 text-emerald-800"
+      "Mathematics": "bg-red-100 text-red-800",
+      "English": "bg-indigo-100 text-indigo-800", 
+      "Arabic": "bg-orange-100 text-orange-800",
+      "Somali": "bg-teal-100 text-teal-800",
+      "Biology": "bg-green-100 text-green-800",
+      "Chemistry": "bg-blue-100 text-blue-800",
+      "Physics": "bg-purple-100 text-purple-800",
+      "History & Geography": "bg-amber-100 text-amber-800",
+      "Islamic Studies": "bg-emerald-100 text-emerald-800",
+      "Computer Studies": "bg-cyan-100 text-cyan-800",
+      "BREAK": "bg-gray-100 text-gray-600"
     };
     
     return colors[subject as keyof typeof colors] || "bg-gray-100 text-gray-800";
