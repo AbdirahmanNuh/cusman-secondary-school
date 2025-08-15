@@ -265,20 +265,23 @@ const Timetable = () => {
               <CardTitle className="text-xl text-primary">Subject Categories</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 {[
-                  { category: "Mathematics", color: "bg-blue-100 text-blue-800" },
-                  { category: "Sciences", color: "bg-purple-100 text-purple-800" },
-                  { category: "Languages", color: "bg-green-100 text-green-800" },
-                  { category: "Humanities", color: "bg-amber-100 text-amber-800" },
-                  { category: "Arts", color: "bg-pink-100 text-pink-800" },
-                  { category: "Technology", color: "bg-indigo-100 text-indigo-800" },
-                  { category: "Physical Ed", color: "bg-lime-100 text-lime-800" },
-                  { category: "Breaks", color: "bg-gray-100 text-gray-600" }
+                  { category: "Mathematics", color: "bg-red-100 text-red-800" },
+                  { category: "English", color: "bg-indigo-100 text-indigo-800" },
+                  { category: "Arabic", color: "bg-orange-100 text-orange-800" },
+                  { category: "Somali", color: "bg-teal-100 text-teal-800" },
+                  { category: "Biology", color: "bg-green-100 text-green-800" },
+                  { category: "Chemistry", color: "bg-blue-100 text-blue-800" },
+                  { category: "Physics", color: "bg-purple-100 text-purple-800" },
+                  { category: "History & Geography", color: "bg-amber-100 text-amber-800" },
+                  { category: "Islamic Studies", color: "bg-emerald-100 text-emerald-800" },
+                  { category: "Computer Studies", color: "bg-cyan-100 text-cyan-800" },
+                  { category: "Break", color: "bg-gray-100 text-gray-600" }
                 ].map((item, index) => (
                   <div key={index} className="flex items-center gap-2">
                     <div className={`w-4 h-4 rounded ${item.color}`}></div>
-                    <span className="text-sm">{item.category}</span>
+                    <span className="text-sm font-medium">{item.category}</span>
                   </div>
                 ))}
               </div>
@@ -304,10 +307,9 @@ const Timetable = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  <p><strong>Monday - Friday:</strong> 8:00 AM - 3:00 PM</p>
-                  <p><strong>Morning Break:</strong> 10:00 AM - 10:20 AM</p>
-                  <p><strong>Lunch Break:</strong> 12:20 PM - 1:00 PM</p>
-                  <p><strong>Assembly:</strong> Fridays 2:20 PM - 3:00 PM</p>
+                  <p><strong>Saturday - Wednesday:</strong> 7:40 AM - 12:00 PM</p>
+                  <p><strong>Morning Break:</strong> 9:40 AM - 10:00 AM</p>
+                  <p><strong>Weekend:</strong> Thursday & Friday</p>
                 </div>
               </CardContent>
             </Card>
