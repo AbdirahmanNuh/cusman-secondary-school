@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Users, BookOpen, Trophy, Globe } from "lucide-react";
+import { ArrowRight, Users, BookOpen, Trophy, Globe, Microscope, Atom, Heart, Calculator, FileText, MessageCircle, Clock, Map, Star, Monitor } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Header from "@/components/Header";
@@ -153,6 +153,129 @@ const Home = () => {
                 </div>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Curriculum Section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="font-academic text-4xl font-bold text-primary mb-4">
+              Complete Subject Overview
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              All subjects offered across Forms 1-4 with detailed descriptions and key topics
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                title: "Chemistry",
+                description: "Study of matter, its properties, and chemical reactions through experiments and theory.",
+                topics: ["Atomic Structure", "Chemical Bonding", "Reactions", "Laboratory Work"],
+                icon: Microscope,
+                color: "text-blue-600"
+              },
+              {
+                title: "Physics",
+                description: "Understanding the fundamental laws of nature, energy, and the physical world.",
+                topics: ["Mechanics", "Electricity", "Waves", "Thermodynamics"],
+                icon: Atom,
+                color: "text-purple-600"
+              },
+              {
+                title: "Biology",
+                description: "Exploration of living organisms, their structures, functions, and interactions.",
+                topics: ["Cell Biology", "Genetics", "Ecology", "Human Anatomy"],
+                icon: Heart,
+                color: "text-green-600"
+              },
+              {
+                title: "Mathematics",
+                description: "Development of logical thinking through numbers, algebra, geometry, and problem-solving.",
+                topics: ["Algebra", "Geometry", "Calculus", "Statistics"],
+                icon: Calculator,
+                color: "text-red-600"
+              },
+              {
+                title: "English",
+                description: "Mastery of English language, skills, literature, and effective communication.",
+                topics: ["Grammar", "Literature", "Writing", "Speaking"],
+                icon: FileText,
+                color: "text-indigo-600"
+              },
+              {
+                title: "Arabic",
+                description: "Learning Arabic language, grammar, and cultural understanding.",
+                topics: ["Grammar", "Vocabulary", "Reading", "Islamic Texts"],
+                icon: MessageCircle,
+                color: "text-orange-600"
+              },
+              {
+                title: "Somali",
+                description: "Study of Somali language, literature, and cultural heritage.",
+                topics: ["Grammar", "Literature", "Poetry", "Cultural Studies"],
+                icon: Globe,
+                color: "text-teal-600"
+              },
+              {
+                title: "History & Geography",
+                description: "Understanding world history, geography, and their impact on modern society.",
+                topics: ["World History", "Geography", "Political Science", "Current Events"],
+                icon: Map,
+                color: "text-amber-600"
+              },
+              {
+                title: "Islamic Studies",
+                description: "Study of Islamic principles, history, and moral values.",
+                topics: ["Quran Studies", "Hadith", "Islamic History", "Islamic Ethics"],
+                icon: Star,
+                color: "text-emerald-600"
+              },
+              {
+                title: "Computer Studies",
+                description: "Introduction to computer science, programming, and digital literacy.",
+                topics: ["Programming", "Web Development", "Digital Skills", "Computer Hardware"],
+                icon: Monitor,
+                color: "text-cyan-600"
+              }
+            ].map((subject, index) => (
+              <Card key={index} className="card-elegant hover:shadow-lg transition-elegant">
+                <CardContent className="p-6">
+                  <div className="flex items-center space-x-3 mb-4">
+                    <subject.icon className={`h-8 w-8 ${subject.color}`} />
+                    <h3 className="font-semibold text-xl text-primary">{subject.title}</h3>
+                  </div>
+                  <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
+                    {subject.description}
+                  </p>
+                  <div className="space-y-2">
+                    <p className="text-sm font-medium text-primary">Key Topics:</p>
+                    <div className="flex flex-wrap gap-1">
+                      {subject.topics.map((topic, topicIndex) => (
+                        <span 
+                          key={topicIndex}
+                          className="inline-block bg-muted text-muted-foreground text-xs px-2 py-1 rounded-md"
+                        >
+                          {topic}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <Link to="/curriculum">
+              <Button className="bg-primary hover:bg-primary-dark">
+                View Complete Curriculum Details
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
