@@ -69,23 +69,31 @@ const FormSelector = ({
   return (
     <div className="w-full max-w-md">
       <Select value={selectedForm} onValueChange={handleValueChange}>
-        <SelectTrigger className="w-full h-12 bg-background border-2 border-border hover:border-primary focus:border-primary transition-colors">
-          <SelectValue placeholder={placeholder} />
+        <SelectTrigger className="w-full h-14 bg-card border-2 border-border hover:border-primary focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 shadow-sm">
+          <SelectValue placeholder={placeholder} className="font-medium" />
         </SelectTrigger>
-        <SelectContent className="bg-background border-2 border-border shadow-lg z-50">
-          <div className="max-h-64 overflow-y-auto">
-            {formOptions.map((group) => (
+        <SelectContent className="bg-card border border-border shadow-xl z-50 min-w-[280px]">
+          <div className="max-h-80 overflow-y-auto">
+            {formOptions.map((group, groupIndex) => (
               <SelectGroup key={group.level}>
-                <SelectLabel className="px-4 py-2 text-sm font-semibold text-muted-foreground bg-muted/30">
+                {groupIndex > 0 && (
+                  <div className="border-t border-border/50 my-1"></div>
+                )}
+                <SelectLabel className="px-4 py-3 text-sm font-bold text-primary bg-muted/20 border-b border-border/30 uppercase tracking-wide">
                   {group.level}
                 </SelectLabel>
                 {group.forms.map((form) => (
                   <SelectItem 
                     key={form.value} 
                     value={form.value}
-                    className="py-3 px-6 hover:bg-muted focus:bg-muted cursor-pointer"
+                    className="py-3 px-6 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground cursor-pointer transition-colors duration-200 border-l-4 border-transparent hover:border-primary/30"
                   >
-                    <span className="font-medium text-foreground">{form.label}</span>
+                    <div className="flex items-center justify-between w-full">
+                      <span className="font-medium text-foreground">{form.label}</span>
+                      <span className="text-xs text-muted-foreground/60 font-mono">
+                        {form.value}
+                      </span>
+                    </div>
                   </SelectItem>
                 ))}
               </SelectGroup>
