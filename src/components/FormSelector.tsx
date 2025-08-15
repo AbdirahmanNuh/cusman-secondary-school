@@ -88,12 +88,7 @@ const FormSelector = ({
                     value={form.value}
                     className="py-3 px-6 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground cursor-pointer transition-colors duration-200 border-l-4 border-transparent hover:border-primary/30"
                   >
-                    <div className="flex items-center justify-between w-full">
-                      <span className="font-medium text-foreground">{form.label}</span>
-                      <span className="text-xs text-muted-foreground/60 font-mono">
-                        {form.value}
-                      </span>
-                    </div>
+                    <span className="font-medium text-foreground">{form.label}</span>
                   </SelectItem>
                 ))}
               </SelectGroup>
